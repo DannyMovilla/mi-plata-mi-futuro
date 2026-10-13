@@ -1,0 +1,177 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description?: string; dark?: boolean; inkBar?: boolean }
+const { inkBar = false, title, description = 'Mi Plata, Mi Futuro: campaña de educación financiera para jóvenes. Pequeños hábitos, grandes metas.', dark = true } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/campana', label: 'La campaña' },
+  { href: '/aprende', label: 'Aprende' },
+  { href: '/herramientas', label: 'Herramientas' },
+  { href: '/multimedia', label: 'Multimedia' },
+  { href: '/equipo', label: 'Equipo' },
+];
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera para jóvenes' : `${title} · Mi Plata, Mi Futuro`;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0E6B4F" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="/img/logo-vertical.png" />
+  <script is:inline>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class:list={['bar', { 'bar--light': !dark, 'bar--ink': inkBar }]}>
+    <div class="wrap bar__in">
+      <a href="/" class="mark" aria-label="Mi Plata, Mi Futuro, inicio">
+        <img src="/img/icon.svg" width="40" height="40" alt="" />
+        <span>Mi Plata, <b>Mi Futuro</b></span>
+      </a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+        <span class="sr-only">Abrir menú</span><i></i><i></i>
+      </button>
+      <nav id="menu" aria-label="Principal">
+        <ul>
+          {nav.map((n) => (
+            <li><a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <slot />
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__mark" aria-hidden="true">
+        <svg viewBox="0 0 1200 300" preserveAspectRatio="xMinYMax meet">
+          <circle cx="150" cy="150" r="150" fill="#FFC93C" />
+          <circle cx="150" cy="150" r="118" fill="none" stroke="#E0A800" stroke-width="16" />
+          <circle cx="388" cy="196" r="104" fill="#3DDC97" />
+          <circle cx="560" cy="226" r="74" fill="#B8F5D8" />
+          <circle cx="684" cy="252" r="48" fill="#F7F5EF" />
+          <circle cx="768" cy="270" r="30" fill="#FFC93C" />
+        </svg>
+        <p class="foot__word">Mi plata,<br />mi futuro.</p>
+      </div>
+      <div class="foot__cols">
+        <div>
+          <h2 class="foot__h">La campaña</h2>
+          <a href="/campana">Misión y visión</a>
+          <a href="/campana#objetivos">Objetivos</a>
+          <a href="/campana#identidad">Identidad visual</a>
+        </div>
+        <div>
+          <h2 class="foot__h">Aprende</h2>
+          <a href="/aprende/presupuesto-50-30-20">Presupuesto 50/30/20</a>
+          <a href="/aprende/ahorro-y-emergencias">Ahorro</a>
+          <a href="/aprende/credito-con-cabeza">Crédito</a>
+          <a href="/aprende/evita-estafas">Estafas</a>
+          <a href="/aprende/compras-inteligentes">Compras</a>
+        </div>
+        <div>
+          <h2 class="foot__h">Herramientas</h2>
+          <a href="/herramientas#calculadora">Calculadora 50/30/20</a>
+          <a href="/herramientas#simulador">Simulador de ahorro</a>
+          <a href="/herramientas#quiz">Quiz financiero</a>
+        </div>
+        <div>
+          <h2 class="foot__h">Más</h2>
+          <a href="/multimedia">Video e infografía</a>
+          <a href="/equipo">Equipo</a>
+          <a href="/referencias">Referencias</a>
+        </div>
+        <div class="foot__about">
+          <p>Proyecto de aula de Informática y Convergencia Tecnológica, Corporación Unificada Nacional de Educación Superior (CUN), 2026.</p>
+          <p>La información de este sitio es educativa y no reemplaza la asesoría de un profesional financiero.</p>
+        </div>
+      </div>
+      <div class="foot__last">
+        <span>© 2026 Mi Plata, Mi Futuro · Pequeños hábitos, grandes metas</span>
+        <a href="#contenido" class="btn btn--light foot__top">Volver arriba</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Menú móvil
+    const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      document.body.classList.toggle('menu-open', !open);
+    });
+    // Entradas escalonadas
+    const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    els.forEach((el) => Array.from(el.children).forEach((c, i) => (c as HTMLElement).style.setProperty('--i', String(i))));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -10% 0px' });
+      els.forEach((el) => io.observe(el));
+    } else els.forEach((el) => el.classList.add('is-in'));
+  </script>
+</body>
+</html>
+
+<style>
+  .skip { position: absolute; left: -9999px; top: 8px; z-index: 50; background: var(--amarillo); color: var(--noche); padding: 10px 16px; border-radius: 999px; font-weight: 600; }
+  .skip:focus { left: 8px; }
+  .bar { position: absolute; inset: 0 0 auto 0; z-index: 20; color: var(--hueso); }
+  .bar--ink { color: var(--ink); }
+  .bar--ink .mark b { color: var(--verde); }
+  .bar--light { position: relative; color: var(--ink); background: var(--ground); }
+  .bar__in { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  .mark { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+  .mark b { font-weight: 800; color: var(--menta); }
+  .bar--light .mark b { color: var(--verde); }
+  nav ul { display: flex; gap: clamp(16px, 2.4vw, 36px); list-style: none; margin: 0; padding: 0; }
+  nav a { text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 0; position: relative; }
+  nav a::after { content: ''; position: absolute; left: 50%; bottom: 2px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--amarillo); opacity: 0; transform: scale(0.4); transition: transform var(--t-hover) var(--ease-out), opacity var(--t-hover) ease; }
+  nav a:hover::after, nav a[aria-current='page']::after { transform: scale(1); opacity: 1; }
+  .menu-btn { display: none; }
+
+  @media (max-width: 860px) {
+    .menu-btn { display: grid; place-content: center; gap: 7px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--amarillo); cursor: pointer; z-index: 30; }
+    .menu-btn i { display: block; width: 20px; height: 2.5px; background: var(--noche); border-radius: 2px; transition: transform var(--t-ui) var(--ease-out); }
+    :global(body.menu-open) .menu-btn i:first-of-type { transform: translateY(4.75px) rotate(45deg); }
+    :global(body.menu-open) .menu-btn i:last-of-type { transform: translateY(-4.75px) rotate(-45deg); }
+    nav { position: fixed; inset: 0; background: var(--noche); color: var(--hueso); display: flex; align-items: center; padding: var(--margin); clip-path: circle(0 at calc(100% - 44px) 42px); visibility: hidden; transition: clip-path 450ms var(--ease-in-out), visibility 0s linear 450ms; z-index: 25; }
+    :global(body.menu-open) nav { clip-path: circle(150% at calc(100% - 44px) 42px); visibility: visible; transition: clip-path 450ms var(--ease-in-out), visibility 0s; }
+    nav ul { flex-direction: column; gap: 8px; padding-left: 24px; }
+    nav a { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; }
+    nav a::after { left: -20px; top: 50%; margin: -4px 0 0; }
+    .mark span { font-size: 16px; }
+  }
+
+  .foot { background: var(--verde); color: var(--hueso); padding: 120px 0 40px; margin-top: 0; }
+  .foot__mark { position: relative; }
+  .foot__mark svg { width: 100%; height: auto; max-height: 34svh; }
+  .foot__word { position: absolute; right: 0; bottom: 0; margin: 0; text-align: right; font-weight: 800; font-size: clamp(40px, 6.4vw, 104px); line-height: 0.95; letter-spacing: -0.04em; }
+  .foot__cols { display: grid; grid-template-columns: repeat(4, 1fr) 1.4fr; gap: 32px; margin-top: 72px; }
+  .foot__cols a { display: block; text-decoration: none; font-size: 16px; padding: 5px 0; color: #E3F4EC; transition: color var(--t-hover) ease, transform var(--t-hover) var(--ease-out); }
+  .foot__cols a:hover { color: var(--amarillo); transform: translateX(4px); }
+  .foot__h { font-size: 17px; letter-spacing: 0; margin-bottom: 10px; color: var(--hueso); }
+  .foot__about p { font-size: 16px; color: #E3F4EC; }
+  .foot__last { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 56px; font-size: 15px; color: #E3F4EC; flex-wrap: wrap; }
+  .foot__top { min-height: 44px; font-size: 15px; }
+  .foot__top::before { width: 30px; height: 30px; transform: rotate(-90deg); }
+  .foot__top:hover::before { transform: rotate(-90deg) translateX(3px); }
+  @media (max-width: 860px) {
+    .foot { padding-top: 80px; }
+    .foot__word { position: static; text-align: left; margin-top: 24px; font-size: 15vw; }
+    .foot__cols { grid-template-columns: 1fr 1fr; }
+    .foot__about { grid-column: 1 / -1; }
+  }
+</style>

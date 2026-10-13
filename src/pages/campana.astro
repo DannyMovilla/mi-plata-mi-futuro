@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Illus from '../components/Illus.astro';
+const colores = [
+  { n: 'Verde Bosque', h: '#0E6B4F', m: 'Crecimiento, estabilidad y confianza' },
+  { n: 'Verde Menta', h: '#3DDC97', m: 'Juventud, frescura y energía' },
+  { n: 'Amarillo Moneda', h: '#FFC93C', m: 'El dinero, el valor y el optimismo' },
+  { n: 'Azul Noche', h: '#13213C', m: 'Seriedad y responsabilidad' },
+  { n: 'Blanco Hueso', h: '#F7F5EF', m: 'Claridad, orden y limpieza' },
+];
+---
+<Base title="La campaña" description="Descripción, justificación, misión, visión, objetivos e identidad visual de la campaña Mi Plata, Mi Futuro.">
+  <PageHero title="Una campaña para tu bolsillo" lead="Mi Plata, Mi Futuro es una campaña digital educativa que enseña a los jóvenes a manejar su dinero con hábitos simples y constantes." />
+
+  <section class="section wrap two" aria-labelledby="tema">
+    <h2 id="tema" data-reveal><span>El tema</span></h2>
+    <div data-reveal>
+      <p class="big">La educación financiera es saber tomar decisiones con el dinero: cuánto gastar, cuánto guardar, cuándo endeudarse y cómo protegerse de los engaños.</p>
+      <p>Nuestra campaña está dirigida a jóvenes de 16 a 25 años, en especial estudiantes universitarios que empiezan a recibir sus primeros ingresos: una mesada, un trabajo de medio tiempo, un auxilio o un pago por trabajos independientes. Es la edad en la que se forman los hábitos que acompañan a una persona el resto de su vida.</p>
+      <p>Tratamos cinco temas: el presupuesto con la regla 50/30/20, el ahorro y el fondo de emergencia, el uso responsable del crédito, la prevención de estafas y las compras inteligentes.</p>
+    </div>
+  </section>
+
+  <section class="just" aria-labelledby="just">
+    <div class="wrap just__in">
+      <div data-reveal>
+        <h2 id="just">Por qué la hicimos</h2>
+        <p>En la prueba PISA de 2012, el 56 % de los estudiantes colombianos de 15 años no alcanzó el nivel básico en educación financiera, y Colombia quedó de último entre los 18 países evaluados (OCDE, 2014). En la población adulta, el 81 % no sabe calcular una tasa de interés simple y solo una de cada cinco personas podría cubrir un gasto grande e inesperado (Banco Mundial, 2013).</p>
+        <p>Estas cifras muestran un vacío que la escuela casi nunca llena. Mientras tanto, los jóvenes reciben cada día ofertas de crédito fácil, compras a cuotas y promesas de inversiones milagrosas en redes sociales. Una campaña cercana, en su lenguaje y en los canales que usan, puede ayudarles a tomar mejores decisiones desde ya.</p>
+      </div>
+      <Illus name="meta" bg="#FFC93C" class="just__ill" />
+    </div>
+  </section>
+
+  <section class="section wrap mv" aria-label="Misión y visión">
+    <article class="mv__t mv__t--a" data-reveal>
+      <h2>Misión</h2>
+      <p>Brindar a los jóvenes información clara, práctica y cercana sobre el manejo del dinero, para que tomen decisiones financieras responsables desde hoy y construyan hábitos que les permitan alcanzar sus metas.</p>
+    </article>
+    <article class="mv__t mv__t--b" data-reveal>
+      <h2>Visión</h2>
+      <p>Ser para 2027 un referente digital de educación financiera para jóvenes universitarios en Colombia, reconocido por inspirar hábitos de ahorro, consumo responsable y prevención del fraude.</p>
+    </article>
+  </section>
+
+  <section class="section obj" id="objetivos" aria-labelledby="obj-h">
+    <div class="wrap">
+      <h2 id="obj-h" data-reveal><span>Objetivos</span></h2>
+      <p class="obj__general" data-reveal><span><b>Objetivo general.</b> Promover hábitos financieros responsables en jóvenes universitarios mediante una campaña digital educativa que explique de forma clara y práctica cómo presupuestar, ahorrar, usar el crédito y prevenir fraudes.</span></p>
+      <h3 class="obj__sub">Objetivos específicos</h3>
+      <ol class="obj__list" data-reveal>
+        <li>Explicar los conceptos básicos de las finanzas personales (presupuesto, ahorro, crédito y tasa efectiva anual) con lenguaje sencillo y ejemplos en pesos colombianos.</li>
+        <li>Ofrecer herramientas interactivas, como una calculadora de presupuesto, un simulador de ahorro y un quiz, para que cada joven aplique lo aprendido a su propia realidad.</li>
+        <li>Alertar sobre estafas, pirámides y fraudes digitales, y enseñar a verificar si una entidad está vigilada por la Superintendencia Financiera.</li>
+        <li>Difundir el mensaje con recursos multimedia (blog, infografía y video) que se puedan compartir fácilmente en redes sociales.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section wrap ident" id="identidad" aria-labelledby="id-h">
+    <div class="ident__head" data-reveal>
+      <h2 id="id-h">Identidad visual</h2>
+      <p>Una moneda de la que brota una planta: el dinero que se cuida hoy crece mañana. La flecha que sube dentro de la moneda representa las metas que se alcanzan con constancia.</p>
+    </div>
+    <div class="ident__logo" data-reveal>
+      <img src="/img/logo-vertical.png" width="1800" height="1320" alt="Logo de Mi Plata, Mi Futuro: una moneda dorada con un brote verde dentro de un cuadrado verde, con el nombre y el eslogan Pequeños hábitos, grandes metas" loading="lazy" />
+      <div class="ident__txt">
+        <p><b>Nombre.</b> “Plata” es la palabra con la que los jóvenes colombianos se refieren al dinero. Repetir “Mi” hace que cada persona se apropie del mensaje.</p>
+        <p><b>Eslogan.</b> “Pequeños hábitos, grandes metas”: no hace falta ganar mucho para empezar; la constancia es lo que lleva a los logros.</p>
+        <p><b>Tipografía.</b> Poppins, una letra geométrica y redondeada, moderna y fácil de leer en el celular. ExtraBold para títulos; Regular y Medium para textos.</p>
+        <a class="btn" href="/img/explicacion-diseno-visual.pdf" download>Descargar explicación (PDF)</a>
+      </div>
+    </div>
+    <ul class="ident__colors" aria-label="Colores de la campaña" data-reveal>
+      {colores.map((c) => (
+        <li>
+          <span class="dot" style={`background:${c.h}`}></span>
+          <b>{c.n}</b>
+          <span class="hex">{c.h}</span>
+          <span class="m">{c.m}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .two { display: grid; grid-template-columns: 4fr 7fr; gap: 40px; }
+  .big { font-size: clamp(22px, 2.2vw, 32px); line-height: 1.35; font-weight: 500; letter-spacing: -0.01em; }
+  .just { background: var(--noche); color: var(--hueso); padding: var(--section) 0; }
+  .just__in { display: grid; grid-template-columns: 7fr 4fr; gap: 64px; align-items: center; }
+  .just h2 { margin-bottom: 32px; }
+  .just p { max-width: 62ch; }
+  .just__ill { width: 100%; max-width: 420px; justify-self: end; }
+  .mv { display: grid; grid-template-columns: 7fr 5fr; gap: 12px; align-items: start; }
+  .mv__t { padding: clamp(28px, 4vw, 56px); min-height: 460px; display: flex; flex-direction: column; justify-content: space-between; }
+  .mv__t p { font-size: clamp(19px, 1.7vw, 24px); line-height: 1.45; max-width: 36ch; margin: 0; }
+  .mv__t--a { background: var(--amarillo); border-top-right-radius: 50% 40%; }
+  .mv__t--b { background: var(--menta); margin-top: 120px; border-top-right-radius: 50% 40%; }
+  .obj { background: var(--verde); color: var(--hueso); }
+  .obj__general { font-size: clamp(22px, 2.4vw, 34px); line-height: 1.35; font-weight: 500; max-width: 40ch; margin: 40px 0 72px; }
+  .obj__sub { margin-bottom: 24px; color: var(--menta-2); }
+  .obj__list { list-style: none; counter-reset: o; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px 64px; }
+  .obj__list li { counter-increment: o; position: relative; padding-left: 76px; max-width: 46ch; }
+  .obj__list li::before { content: counter(o); position: absolute; left: 0; top: -4px; width: 52px; height: 52px; border-radius: 50%; background: var(--amarillo); color: var(--noche); display: grid; place-items: center; font-weight: 800; font-size: 22px; }
+  .ident__head { display: grid; grid-template-columns: 4fr 7fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+  .ident__head p { margin: 0; max-width: 54ch; }
+  .ident__logo { display: grid; grid-template-columns: 6fr 5fr; gap: 56px; align-items: center; background: #fff; padding: clamp(24px, 4vw, 56px); border-radius: 48px; }
+  .ident__logo img { width: 100%; height: auto; }
+  .ident__colors { list-style: none; padding: 0; margin: 64px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .ident__colors li { display: flex; flex-direction: column; gap: 2px; font-size: 16px; }
+  .dot { width: 100%; aspect-ratio: 1; border-radius: 50%; margin-bottom: 16px; outline: 2px solid var(--hueso-2); outline-offset: -2px; /* taste-skill-ignore: borde del círculo blanco sobre fondo claro */ transition: transform var(--t-ui) var(--ease-out); }
+  .ident__colors li:hover .dot { transform: rotate(-8deg) scale(1.04); }
+  .hex { color: var(--muted); }
+  .m { margin-top: 6px; }
+  @media (max-width: 860px) {
+    .two, .just__in, .mv, .ident__head, .ident__logo { grid-template-columns: 1fr; }
+    .just__ill { max-width: 260px; justify-self: start; }
+    .mv__t { min-height: 340px; }
+    .mv__t--b { margin-top: 0; }
+    .obj__list { grid-template-columns: 1fr; gap: 32px; }
+    .obj__list li { padding-left: 64px; }
+    .ident__colors { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

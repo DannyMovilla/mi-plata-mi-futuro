@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200" width="900" height="200">
+<g>
+  <rect x="0" y="0" width="200" height="200" rx="48" fill="#0E6B4F"/>
+  <!-- stem -->
+  <path d="M100 98 C100 80 100 70 100 56" stroke="#3DDC97" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- leaves -->
+  <path d="M100 66 C84 66 66 58 62 38 C82 36 98 46 100 66 Z" fill="#3DDC97"/>
+  <path d="M100 58 C114 56 132 46 136 26 C114 24 100 38 100 58 Z" fill="#B8F5D8"/>
+  <!-- coin -->
+  <circle cx="100" cy="128" r="46" fill="#FFC93C"/>
+  <circle cx="100" cy="128" r="36" fill="none" stroke="#E0A800" stroke-width="5"/>
+  <path d="M84 136 L96 124 L104 132 L118 116" stroke="#0E6B4F" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M108 115 L119 115 L119 126" stroke="#0E6B4F" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<text x="228" y="110" font-family="Poppins" font-weight="800" font-size="72" letter-spacing="-2" fill="#13213C">Mi Plata, <tspan fill="#0E6B4F">Mi Futuro</tspan></text>
+<text x="232" y="158" font-family="Poppins" font-weight="500" font-size="27" fill="#4A5875">Pequeños hábitos, grandes metas</text>
+</svg>

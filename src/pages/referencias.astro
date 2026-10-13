@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Base title="Referencias" description="Referencias bibliográficas de la campaña Mi Plata, Mi Futuro en normas APA 7.">
+  <PageHero title="Referencias" lead="Fuentes consultadas para la campaña, en normas APA, séptima edición." color="var(--noche)" />
+  <section class="section wrap refs">
+    <ol class="refs__list">
+      <li>Banco Mundial. (2013). <i>Encuesta nacional de capacidades financieras en Colombia</i>. https://www.bancomundial.org/es/country/colombia/publication/national-survey-financial-capabilities-colombia</li>
+      <li>Banca de las Oportunidades. (s.f.). <i>Banca de las Oportunidades</i>. https://www.bancadelasoportunidades.gov.co</li>
+      <li>Banco de la República. (s.f.). <i>Banco de la República de Colombia</i>. https://www.banrep.gov.co</li>
+      <li>OECD. (2014). <i>PISA 2012 results: Students and money. Financial literacy skills for the 21st century</i> (Vol. VI). OECD Publishing. https://doi.org/10.1787/9789264208094-en</li>
+      <li>Superintendencia Financiera de Colombia. (s.f.). <i>Superintendencia Financiera de Colombia</i>. https://www.superfinanciera.gov.co</li>
+    </ol>
+    <p class="muted small refs__note">Las cifras citadas en el sitio corresponden a las mediciones más recientes disponibles en estas fuentes al momento de elaborar la campaña.</p>
+  </section>
+</Base>
+<style>
+  .refs__list { list-style: none; padding: 0; margin: 0; max-width: 80ch; }
+  .refs__list li { padding-left: 2.5em; text-indent: -2.5em; margin-bottom: 24px; overflow-wrap: anywhere; }
+  .refs__note { margin-top: 40px; }
+</style>

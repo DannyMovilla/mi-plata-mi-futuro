@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { VIDEO_ID } from '../data/config';
+const recursos = [
+  { t: 'Superintendencia Financiera de Colombia', d: 'Consulta si una entidad está vigilada antes de entregarle tu dinero.', u: 'https://www.superfinanciera.gov.co' },
+  { t: 'Banca de las Oportunidades', d: 'Programa del Gobierno con estudios y material sobre inclusión y educación financiera.', u: 'https://www.bancadelasoportunidades.gov.co' },
+  { t: 'Banco de la República', d: 'Información sobre inflación, tasas de interés y cómo funciona el dinero en Colombia.', u: 'https://www.banrep.gov.co' },
+  { t: 'OCDE · PISA educación financiera', d: 'Resultados internacionales sobre la educación financiera de los jóvenes.', u: 'https://www.oecd.org/pisa/' },
+];
+---
+<Base title="Multimedia" description="Video de la campaña, infografía descargable, galería de la identidad visual y recursos para seguir aprendiendo.">
+  <PageHero title="Mira, descarga y comparte" lead="El video de la campaña, la infografía y los recursos visuales de Mi Plata, Mi Futuro, listos para compartir." color="var(--verde)" coin="#3DDC97" />
+
+  <section class="section wrap vid" id="video" aria-labelledby="vid-h">
+    <div class="vid__head" data-reveal>
+      <h2 id="vid-h">El video de la campaña</h2>
+      <p>En este video el equipo explica el tema y el propósito de la campaña, recorre el sitio web y presenta los elementos visuales que creamos.</p>
+    </div>
+    <div class="vid__frame">
+      {VIDEO_ID ? (
+        <iframe src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}`} title="Video de la campaña Mi Plata, Mi Futuro" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      ) : (
+        <div class="vid__soon">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#FFC93C" /><path d="M82 64 L142 100 L82 136 Z" fill="#13213C" /></svg>
+          <p>El video se publicará aquí muy pronto.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section info" id="infografia" aria-labelledby="inf-h">
+    <div class="wrap info__in">
+      <div class="info__txt" data-reveal>
+        <h2 id="inf-h">La infografía</h2>
+        <p>Elaborada por el equipo con datos de la OCDE y el Banco Mundial. Resume por qué importa la educación financiera, la regla 50/30/20, cinco hábitos clave, cómo reconocer una estafa y las preguntas que conviene hacerse antes de comprar.</p>
+        <div class="info__acts">
+          <a class="btn btn--dark" href="/img/infografia.png" download>Descargar PNG</a>
+          <a class="btn btn--light" href="/img/infografia.pdf" download>Descargar PDF</a>
+        </div>
+      </div>
+      <a class="info__img" href="/img/infografia.png" target="_blank" rel="noopener">
+        <img src="/img/infografia.png" width="2160" height="7642" alt="Infografía Mi Plata, Mi Futuro: 5 pasos para tomar el control de tu plata. Incluye datos sobre Colombia, la regla 50/30/20 con un ejemplo de $1.000.000, cinco hábitos (anotar gastos, págate primero, fondo de emergencia, crédito con cabeza, regla de las 48 horas), una alerta sobre estafas y cuatro preguntas antes de comprar." loading="lazy" />
+      </a>
+    </div>
+  </section>
+
+  <section class="section wrap gal" aria-labelledby="gal-h">
+    <h2 id="gal-h" data-reveal><span>Galería de la identidad</span></h2>
+    <div class="gal__grid">
+      <figure class="g g--a"><img src="/img/logo-vertical.png" width="1800" height="1320" alt="Logo vertical de la campaña" loading="lazy" /><figcaption>Logo vertical</figcaption></figure>
+      <figure class="g g--b"><img src="/img/logo-horizontal-oscuro.png" width="2856" height="768" alt="Logo horizontal sobre fondo azul noche" loading="lazy" /><figcaption>Logo sobre fondo oscuro</figcaption></figure>
+      <figure class="g g--c"><img src="/img/paleta-colores.png" width="3200" height="1800" alt="Paleta de colores: Verde Bosque, Verde Menta, Amarillo Moneda, Azul Noche y Blanco Hueso" loading="lazy" /><figcaption>Paleta de colores y tipografía</figcaption></figure>
+      <figure class="g g--d"><img src="/img/icon.png" width="800" height="800" alt="Ícono de la campaña: moneda con brote" loading="lazy" /><figcaption>Ícono</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section rec" aria-labelledby="rec-h">
+    <div class="wrap rec__in">
+      <h2 id="rec-h" data-reveal><span>Sigue aprendiendo</span></h2>
+      <ul class="rec__list">
+        {recursos.map((r) => (
+          <li><a href={r.u} target="_blank" rel="noopener"><span class="rec__t">{r.t}</span><span class="rec__d">{r.d}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .vid__head { display: grid; grid-template-columns: 5fr 6fr; gap: 40px; align-items: end; margin-bottom: 40px; }
+  .vid__head p { margin: 0; max-width: 52ch; }
+  .vid__frame { aspect-ratio: 16 / 9; background: var(--noche); border-radius: 48px; overflow: hidden; }
+  .vid__frame iframe { width: 100%; height: 100%; border: 0; }
+  .vid__soon { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; color: var(--hueso); }
+  .vid__soon svg { width: clamp(100px, 14vw, 180px); animation: pulse 2.4s var(--ease-in-out) infinite; }
+  @keyframes pulse { 50% { transform: scale(1.06); } }
+  .info { background: var(--amarillo); }
+  .info__in { display: grid; grid-template-columns: 6fr 5fr; gap: 64px; align-items: center; }
+  .info__txt p { max-width: 50ch; }
+  .info__acts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .info__img { display: block; height: 640px; overflow: hidden; border-radius: 48px 48px 0 0; transition: transform var(--t-ui) var(--ease-out); }
+  .info__img:hover { transform: translateY(-6px); }
+  .info__img img { width: 100%; height: auto; }
+  .gal h2 { margin-bottom: 40px; }
+  .gal__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+  .g { margin: 0; background: #fff; border-radius: 40px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; overflow: hidden; }
+  .g img { width: 100%; height: auto; transition: transform 500ms var(--ease-out); }
+  .g:hover img { transform: scale(1.03); }
+  .g figcaption { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .g--a { grid-column: 1 / 6; grid-row: span 2; }
+  .g--b { grid-column: 6 / 13; background: var(--noche); }
+  .g--b figcaption { color: #D9DFEA; }
+  .g--c { grid-column: 6 / 10; }
+  .g--d { grid-column: 10 / 13; background: var(--menta); }
+  .g--d img { width: 70%; margin: auto; }
+  .g--d figcaption { color: var(--noche); }
+  .rec { background: var(--noche); color: var(--hueso); }
+  .rec__in { display: grid; grid-template-columns: 4fr 7fr; gap: 40px; }
+  .rec__list { list-style: none; padding: 0; margin: 0; }
+  .rec__list a { display: flex; flex-direction: column; gap: 4px; padding: 22px 0 22px 44px; text-decoration: none; position: relative; transition: transform var(--t-ui) var(--ease-out); }
+  .rec__list a::before { content: ''; position: absolute; left: 0; top: 28px; width: 22px; height: 22px; border-radius: 50%; background: var(--amarillo); transition: transform var(--t-ui) var(--ease-out); }
+  .rec__list a:hover { transform: translateX(8px); }
+  .rec__list a:hover::before { transform: scale(1.25); }
+  .rec__t { font-size: var(--t-h3); font-weight: 800; letter-spacing: -0.015em; }
+  .rec__d { color: #D9DFEA; }
+  @media (max-width: 860px) {
+    .vid__head, .info__in, .rec__in { grid-template-columns: 1fr; gap: 16px; }
+    .info__in { gap: 32px; }
+    .vid__frame { border-radius: 28px; }
+    .info__img { height: 420px; }
+    .gal__grid { grid-template-columns: 1fr 1fr; }
+    .g--a, .g--b, .g--c, .g--d { grid-column: auto; grid-row: auto; }
+    .g--a, .g--b { grid-column: 1 / -1; }
+    .g { border-radius: 28px; padding: 20px; }
+  }
+</style>

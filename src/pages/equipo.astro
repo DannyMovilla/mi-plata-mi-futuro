@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { equipo, curso } from '../data/config';
+const colors = ['#FFC93C', '#3DDC97', '#B8F5D8', '#F7F5EF', '#FFC93C', '#3DDC97'];
+const ini = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((p) => p[0]).join('').toUpperCase();
+---
+<Base title="Equipo" description="Integrantes del equipo que creó la campaña Mi Plata, Mi Futuro.">
+  <PageHero title="Quiénes hicimos esta campaña" lead={`Somos estudiantes de ${curso.asignatura} en la ${curso.institucion}.`} color="var(--noche)" />
+
+  <section class="section wrap team" aria-labelledby="team-h">
+    <h2 id="team-h" class="sr-only">Integrantes</h2>
+    <ul class="team__list">
+      {equipo.map((p, i) => (
+        <li data-reveal>
+          <span class="av" style={`background:${colors[i % colors.length]}`} aria-hidden="true">{ini(p.nombre)}</span>
+          <span class="team__n">{p.nombre}</span>
+          <span class="team__r">{p.rol}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section course" aria-labelledby="course-h">
+    <div class="wrap course__in">
+      <h2 id="course-h" data-reveal><span>El curso</span></h2>
+      <dl class="course__dl">
+        <div><dt>Asignatura</dt><dd>{curso.asignatura}</dd></div>
+        <div><dt>Programa</dt><dd>{curso.programa}</dd></div>
+        <div><dt>Docente</dt><dd>{curso.docente}</dd></div>
+        <div><dt>Ficha o grupo</dt><dd>{curso.grupo}</dd></div>
+        <div><dt>Institución</dt><dd>{curso.institucion}</dd></div>
+        <div><dt>Periodo</dt><dd>{curso.periodo}</dd></div>
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .team__list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px 24px; }
+  .team__list li { display: flex; flex-direction: column; gap: 4px; }
+  .av { width: 100%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: clamp(48px, 6vw, 96px); letter-spacing: -0.04em; color: var(--noche); margin-bottom: 20px; transition: transform 500ms var(--ease-out); }
+  .team__list li:hover .av { transform: rotate(-10deg); }
+  .team__n { font-size: var(--t-h3); font-weight: 800; letter-spacing: -0.015em; }
+  .team__r { color: var(--muted); }
+  .course { background: var(--verde); color: var(--hueso); }
+  .course__in { display: grid; grid-template-columns: 4fr 7fr; gap: 40px; }
+  .course__dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .course__dl dt { font-size: 15px; color: var(--menta-2); font-weight: 600; }
+  .course__dl dd { margin: 4px 0 0; font-size: 20px; font-weight: 600; }
+  @media (max-width: 860px) {
+    .team__list { grid-template-columns: 1fr 1fr; gap: 32px 16px; }
+    .course__in { grid-template-columns: 1fr; }
+    .course__dl { grid-template-columns: 1fr; gap: 20px; }
+  }
+</style>

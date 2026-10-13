@@ -1,0 +1,95 @@
+---
+import Base from '../../layouts/Base.astro';
+import Illus from '../../components/Illus.astro';
+import { articulos } from '../../data/articulos';
+export function getStaticPaths() {
+  return articulos.map((a, i) => ({ params: { slug: a.slug }, props: { a, next: articulos[(i + 1) % articulos.length] } }));
+}
+const { a, next } = Astro.props;
+const dark = a.color === '#13213C';
+---
+<Base title={a.titulo} description={a.resumen} inkBar={!dark}>
+  <section class="ah" style={`--bg:${a.color}; --fg:${dark ? '#F7F5EF' : '#13213C'}`} data-light={dark ? undefined : ''}>
+    <div class="wrap ah__in">
+      <div>
+        <a class="ah__back" href="/aprende">Aprende · {a.tab}</a>
+        <h1>{a.titulo}</h1>
+        <p class="lead">{a.resumen}</p>
+        <p class="small ah__time">{a.lectura} de lectura</p>
+      </div>
+      <Illus name={a.illus} bg={dark ? '#0E6B4F' : '#F7F5EF'} class="ah__ill" label={`Ilustración sobre ${a.tab.toLowerCase()}`} />
+    </div>
+  </section>
+
+  <article class="section wrap art">
+    <aside class="art__ideas" aria-labelledby="ideas-h">
+      <h2 id="ideas-h">Ideas clave</h2>
+      <ul class="coin-list">{a.ideas.map((x) => <li>{x}</li>)}</ul>
+      <a class="btn" href={a.herramienta.href}>{a.herramienta.texto}</a>
+    </aside>
+    <div class="art__body">
+      {a.secciones.map((s) => (
+        <section data-reveal>
+          <h2>{s.h}</h2>
+          {s.p.map((t) => <p>{t}</p>)}
+          {s.lista && <ul class="coin-list">{s.lista.map((l) => <li>{l}</li>)}</ul>}
+        </section>
+      ))}
+    </div>
+  </article>
+
+  <section class="mito" aria-labelledby="mito-h">
+    <div class="wrap mito__in">
+      <h2 id="mito-h" class="sr-only">Mito y realidad</h2>
+      <div class="mito__t mito__t--m" data-reveal><p class="mito__k">Mito</p><p class="mito__x">{a.mito.mito}</p></div>
+      <div class="mito__t mito__t--r" data-reveal><p class="mito__k">Realidad</p><p class="mito__x">{a.mito.realidad}</p></div>
+    </div>
+  </section>
+
+  <section class="section wrap nx">
+    <a class="nx__a" href={`/aprende/${next.slug}`}>
+      <span class="small">Siguiente tema</span>
+      <span class="nx__t">{next.titulo}</span>
+      <Illus name={next.illus} bg={next.color} class="nx__ill" />
+    </a>
+  </section>
+</Base>
+
+<style>
+  .ah { background: var(--bg); color: var(--fg); padding: 150px 0 80px; }
+  .ah__in { display: grid; grid-template-columns: 7fr 4fr; gap: 56px; align-items: end; }
+  .ah h1 { font-size: clamp(44px, 5.6vw, 92px); max-width: 14ch; margin: 18px 0 24px; }
+  .ah__back { font-weight: 600; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+  .ah__back::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+  .ah__time { font-weight: 600; margin: 0; }
+  .ah__ill { width: 100%; max-width: 420px; justify-self: end; }
+  .art { display: grid; grid-template-columns: 4fr 7fr; gap: 64px; align-items: start; }
+  .art__ideas { position: sticky; top: 32px; background: var(--hueso-2); padding: 32px; border-radius: 0 40px 40px 40px; }
+  .art__ideas h2 { font-size: var(--t-h3); margin-bottom: 20px; }
+  .art__body { max-width: 66ch; }
+  .art__body section + section { margin-top: 56px; }
+  .art__body h2 { font-size: clamp(28px, 2.6vw, 38px); margin-bottom: 18px; }
+  .mito { padding-bottom: var(--section); }
+  .mito__in { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mito__t { padding: 40px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; }
+  .mito__t--m { background: var(--noche); color: var(--hueso); border-top-right-radius: 50% 40%; }
+  .mito__t--r { background: var(--menta); border-top-right-radius: 50% 40%; }
+  .mito__k { font-weight: 800; font-size: var(--t-h3); margin: 0; }
+  .mito__x { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.45; margin: 0; max-width: 34ch; }
+  .nx { padding-top: 0; }
+  .nx__a { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; gap: 8px 40px; align-items: end; text-decoration: none; background: var(--verde); color: var(--hueso); padding: 40px; border-radius: 48px; transition: transform var(--t-ui) var(--ease-out); }
+  .nx__a:hover { transform: translateY(-6px); }
+  .nx__t { grid-column: 1; font-size: var(--t-h2); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; max-width: 16ch; }
+  .nx__ill { grid-column: 2; grid-row: 1 / 3; width: 200px; transition: transform 500ms var(--ease-out); }
+  .nx__a:hover .nx__ill { transform: rotate(-10deg); }
+  @media (max-width: 860px) {
+    .ah { padding: 120px 0 56px; }
+    .ah__in, .art, .mito__in { grid-template-columns: 1fr; }
+    .ah__ill { max-width: 200px; justify-self: start; order: -1; }
+    .ah h1 { font-size: 11vw; }
+    .art__ideas { position: static; }
+    .nx__a { grid-template-columns: 1fr; padding: 28px; }
+    .nx__ill { grid-column: 1; grid-row: auto; width: 120px; order: -1; }
+    .nx__t { font-size: 30px; }
+  }
+</style>

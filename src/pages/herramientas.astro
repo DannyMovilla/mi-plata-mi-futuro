@@ -1,0 +1,294 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+const preguntas = [
+  { q: 'Según la regla 50/30/20, ¿qué porcentaje de tus ingresos debería ir al ahorro?', o: ['10 %', '20 %', '30 %', '50 %'], c: 1, e: 'El 20 % va al ahorro: fondo de emergencia y metas. El 50 % es para necesidades y el 30 % para gustos.' },
+  { q: '¿Cuánto dinero se recomienda tener en un fondo de emergencia?', o: ['Lo de una salida con amigos', 'Entre 3 y 6 meses de gastos básicos', 'Un año de salario', 'No hace falta si tienes tarjeta de crédito'], c: 1, e: 'La recomendación habitual es cubrir de 3 a 6 meses de gastos básicos. Se construye por etapas, empezando por un mes.' },
+  { q: '¿Qué indica la tasa efectiva anual (E.A.) de un crédito?', o: ['La cuota que pagas cada mes', 'El costo real del crédito en un año', 'El monto máximo que te prestan', 'Los días que tienes para pagar'], c: 1, e: 'La tasa E.A. muestra cuánto cuesta realmente el crédito en un año. Es el número para comparar entre entidades.' },
+  { q: 'Si solo pagas el mínimo de tu tarjeta de crédito…', o: ['No pagas intereses', 'El saldo restante sigue generando intereses', 'El banco te devuelve dinero', 'Tu deuda desaparece al mes siguiente'], c: 1, e: 'Pagar el mínimo te mantiene al día, pero lo que queda sigue generando intereses. Lo ideal es pagar el total.' },
+  { q: 'Alguien te ofrece una “inversión” que paga 10 % mensual garantizado si traes a más amigos. ¿Qué es lo más probable?', o: ['Una gran oportunidad', 'Una pirámide o una estafa', 'Un CDT normal', 'Un crédito de libre inversión'], c: 1, e: 'Ganancias altas, garantizadas y que dependen de reclutar personas son señales de una pirámide. Verifica siempre en la Superintendencia Financiera.' },
+  { q: '¿Qué significa “págate primero”?', o: ['Comprarte algo apenas recibes dinero', 'Separar tu ahorro apenas recibes dinero', 'Pagar primero las deudas más pequeñas', 'Cobrar antes de trabajar'], c: 1, e: 'Págate primero es separar el ahorro en cuanto recibes dinero, antes de gastar en otras cosas.' },
+  { q: 'Prestas $100.000 con un interés simple del 10 % anual. ¿Cuánto te devuelven al cabo de un año?', o: ['$101.000', '$110.000', '$100.010', '$200.000'], c: 1, e: 'El 10 % de $100.000 son $10.000 de interés. En total recibes $110.000.' },
+  { q: '¿Para qué sirve la regla de las 48 horas?', o: ['Para pagar las facturas a tiempo', 'Para evitar compras por impulso', 'Para devolver un producto', 'Para pedir un crédito rápido'], c: 1, e: 'Esperar dos días antes de una compra no planeada ayuda a separar un antojo de algo que de verdad quieres y puedes pagar.' },
+];
+---
+<Base title="Herramientas" description="Calculadora de presupuesto 50/30/20, simulador de ahorro y quiz de educación financiera para jóvenes.">
+  <PageHero title="Haz las cuentas con tu plata" lead="Tres herramientas para aplicar lo aprendido a tu realidad. Funcionan en el celular, no piden registro y no guardan tus datos.">
+    <ul class="jump">
+      <li><a href="#calculadora">Calculadora 50/30/20</a></li>
+      <li><a href="#simulador">Simulador de ahorro</a></li>
+      <li><a href="#quiz">Quiz financiero</a></li>
+    </ul>
+  </PageHero>
+
+  <!-- CALCULADORA -->
+  <section class="section wrap tool calc" id="calculadora" aria-labelledby="calc-h">
+    <div class="tool__head" data-reveal>
+      <h2 id="calc-h">Calculadora 50/30/20</h2>
+      <p>Escribe cuánto recibes al mes y mira cómo se reparte. Si tus necesidades cuestan más del 50 %, cambia los porcentajes para que se ajusten a tu realidad.</p>
+    </div>
+    <form class="calc__form" onsubmit="return false">
+      <div class="field">
+        <label for="c-ing">Ingreso mensual</label>
+        <div class="money"><span>$</span><input id="c-ing" inputmode="numeric" value="1.000.000" autocomplete="off" /></div>
+      </div>
+      <div class="field field--pct">
+        <label for="c-n">Necesidades %</label><input id="c-n" type="number" min="0" max="100" value="50" />
+      </div>
+      <div class="field field--pct">
+        <label for="c-g">Gustos %</label><input id="c-g" type="number" min="0" max="100" value="30" />
+      </div>
+      <div class="field field--pct">
+        <label for="c-a">Ahorro %</label><input id="c-a" type="number" min="0" max="100" value="20" />
+      </div>
+    </form>
+    <p class="calc__warn" id="c-warn" role="status"></p>
+    <div class="calc__bar" aria-hidden="true">
+      <div class="b b--n" id="b-n"><span>Necesidades</span></div>
+      <div class="b b--g" id="b-g"><span>Gustos</span></div>
+      <div class="b b--a" id="b-a"><span>Ahorro</span></div>
+    </div>
+    <dl class="calc__out" aria-live="polite">
+      <div><dt>Necesidades</dt><dd id="o-n">$500.000</dd><p>Transporte, comida, matrícula, servicios, celular.</p></div>
+      <div><dt>Gustos</dt><dd id="o-g">$300.000</dd><p>Salidas, ropa, streaming, antojos.</p></div>
+      <div><dt>Ahorro</dt><dd id="o-a">$200.000</dd><p>Fondo de emergencia y metas.</p></div>
+    </dl>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="section sim" id="simulador" aria-labelledby="sim-h">
+    <div class="wrap">
+      <div class="tool__head" data-reveal>
+        <h2 id="sim-h">Simulador de ahorro</h2>
+        <p>Descubre cuánto puedes reunir si ahorras lo mismo cada mes. Si tu cuenta paga intereses, escribe la tasa efectiva anual que te ofrece tu entidad; si no, déjala en 0.</p>
+      </div>
+      <div class="sim__grid">
+        <form class="sim__form" onsubmit="return false">
+          <div class="field">
+            <label for="s-ap">Ahorro mensual</label>
+            <div class="money money--dark"><span>$</span><input id="s-ap" inputmode="numeric" value="100.000" autocomplete="off" /></div>
+          </div>
+          <div class="field">
+            <label for="s-m">Meses: <output id="s-m-o">12</output></label>
+            <input id="s-m" type="range" min="1" max="60" value="12" />
+          </div>
+          <div class="field">
+            <label for="s-t">Tasa E.A. (%)</label>
+            <input id="s-t" type="number" min="0" max="30" step="0.1" value="0" class="num" />
+            <span class="hint">Pregunta la tasa en tu banco o billetera. Es un ejemplo, no una oferta.</span>
+          </div>
+        </form>
+        <div class="sim__res">
+          <p class="sim__total"><span class="sim__lbl">Tendrías</span> <b id="s-total">$1.200.000</b></p>
+          <p class="sim__det" id="s-det" aria-live="polite">Aportaste $1.200.000 y ganaste $0 en intereses.</p>
+          <svg class="sim__chart" id="s-chart" viewBox="0 0 600 260" role="img" aria-label="Gráfica del crecimiento del ahorro mes a mes"></svg>
+          <p class="sim__legend"><span class="lg lg--a"></span> Lo que aportas <span class="lg lg--i"></span> Intereses</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="section wrap quiz" id="quiz" aria-labelledby="quiz-h">
+    <div class="tool__head" data-reveal>
+      <h2 id="quiz-h">Quiz financiero</h2>
+      <p>Ocho preguntas para medir cuánto sabes. Al responder verás por qué la opción correcta es la correcta.</p>
+    </div>
+    <div class="qz" id="qz" data-total={preguntas.length}>
+      <div class="qz__progress" aria-hidden="true"><span id="qz-bar"></span></div>
+      {preguntas.map((p, i) => (
+        <fieldset class="qz__q" data-i={i} data-c={p.c} hidden={i !== 0}>
+          <legend><span class="qz__n">Pregunta {i + 1} de {preguntas.length}</span>{p.q}</legend>
+          <div class="qz__opts">
+            {p.o.map((o, j) => (
+              <button type="button" class="qz__o" data-j={j}>{o}</button>
+            ))}
+          </div>
+          <p class="qz__fb" role="status"></p>
+          <p class="qz__exp" hidden>{p.e}</p>
+          <button type="button" class="btn btn--dark qz__next" hidden>{i === preguntas.length - 1 ? 'Ver mi resultado' : 'Siguiente pregunta'}</button>
+        </fieldset>
+      ))}
+      <div class="qz__end" hidden>
+        <p class="qz__score"><b id="qz-s">0</b> de {preguntas.length}</p>
+        <p class="qz__msg" id="qz-msg"></p>
+        <div class="qz__acts">
+          <button type="button" class="btn" id="qz-again">Intentar de nuevo</button>
+          <a class="btn btn--light" href="/aprende">Repasar los temas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const fmt = (n: number) => '$' + Math.round(n).toLocaleString('es-CO');
+  const num = (el: HTMLInputElement) => +el.value.replace(/\D/g, '') || 0;
+  const money = (el: HTMLInputElement, cb: () => void) => el.addEventListener('input', () => { const v = num(el); el.value = v ? v.toLocaleString('es-CO') : ''; cb(); });
+
+  // Calculadora
+  const ing = document.getElementById('c-ing') as HTMLInputElement;
+  const pn = document.getElementById('c-n') as HTMLInputElement;
+  const pg = document.getElementById('c-g') as HTMLInputElement;
+  const pa = document.getElementById('c-a') as HTMLInputElement;
+  const warn = document.getElementById('c-warn')!;
+  function calc() {
+    const v = num(ing), n = +pn.value || 0, g = +pg.value || 0, a = +pa.value || 0, sum = n + g + a;
+    (document.getElementById('o-n')!).textContent = fmt(v * n / 100);
+    (document.getElementById('o-g')!).textContent = fmt(v * g / 100);
+    (document.getElementById('o-a')!).textContent = fmt(v * a / 100);
+    const tot = sum || 1;
+    (document.getElementById('b-n') as HTMLElement).style.flexGrow = String(n / tot);
+    (document.getElementById('b-g') as HTMLElement).style.flexGrow = String(g / tot);
+    (document.getElementById('b-a') as HTMLElement).style.flexGrow = String(a / tot);
+    warn.textContent = sum !== 100 ? `Tus porcentajes suman ${sum} %. Ajústalos para que sumen 100 %.` : a === 0 ? 'Intenta que el ahorro nunca quede en 0 %, aunque sea un poquito.' : '';
+  }
+  money(ing, calc); [pn, pg, pa].forEach((e) => e.addEventListener('input', calc)); calc();
+
+  // Simulador
+  const ap = document.getElementById('s-ap') as HTMLInputElement;
+  const ms = document.getElementById('s-m') as HTMLInputElement;
+  const mo = document.getElementById('s-m-o')!;
+  const ta = document.getElementById('s-t') as HTMLInputElement;
+  const chart = document.getElementById('s-chart')!;
+  function sim() {
+    const a = num(ap), m = +ms.value, ea = Math.max(0, +ta.value || 0) / 100;
+    const r = Math.pow(1 + ea, 1 / 12) - 1;
+    mo.textContent = String(m);
+    let bal = 0; const pts: { b: number; c: number }[] = [];
+    for (let i = 1; i <= m; i++) { bal = bal * (1 + r) + a; pts.push({ b: bal, c: a * i }); }
+    const contrib = a * m;
+    document.getElementById('s-total')!.textContent = fmt(bal);
+    document.getElementById('s-det')!.textContent = `En ${m} ${m === 1 ? 'mes' : 'meses'} aportaste ${fmt(contrib)} y ganaste ${fmt(bal - contrib)} en intereses.`;
+    const W = 600, H = 260, P = 6, max = Math.max(bal, 1);
+    const bw = (W - P * 2) / m;
+    let svg = '';
+    pts.forEach((p, i) => {
+      const x = P + i * bw + bw * 0.12, w = Math.max(1, bw * 0.76);
+      const hc = (p.c / max) * (H - 10), hb = (p.b / max) * (H - 10);
+      svg += `<rect x="${x}" y="${H - hb}" width="${w}" height="${hb - hc}" fill="#FFC93C" rx="${Math.min(w / 2, 6)}"/>`;
+      svg += `<rect x="${x}" y="${H - hc}" width="${w}" height="${hc}" fill="#3DDC97" rx="${Math.min(w / 2, 6)}"/>`;
+    });
+    chart.innerHTML = svg;
+  }
+  money(ap, sim); ms.addEventListener('input', sim); ta.addEventListener('input', sim); sim();
+
+  // Quiz
+  const qz = document.getElementById('qz')!;
+  const qs = Array.from(qz.querySelectorAll<HTMLFieldSetElement>('.qz__q'));
+  const bar = document.getElementById('qz-bar')!;
+  const end = qz.querySelector<HTMLElement>('.qz__end')!;
+  let score = 0;
+  const show = (i: number) => {
+    qs.forEach((q, k) => (q.hidden = k !== i));
+    bar.style.transform = `scaleX(${i / qs.length})`;
+    if (i < qs.length) qs[i].querySelector<HTMLButtonElement>('.qz__o')?.focus({ preventScroll: true });
+  };
+  qs.forEach((q, i) => {
+    const c = +q.dataset.c!;
+    const opts = q.querySelectorAll<HTMLButtonElement>('.qz__o');
+    opts.forEach((b) => b.addEventListener('click', () => {
+      const j = +b.dataset.j!;
+      opts.forEach((o) => { o.disabled = true; if (+o.dataset.j! === c) o.classList.add('is-ok'); });
+      const ok = j === c; if (ok) score++; else b.classList.add('is-bad');
+      q.querySelector('.qz__fb')!.textContent = ok ? '¡Correcto!' : 'No es esa, pero vas aprendiendo.';
+      (q.querySelector('.qz__exp') as HTMLElement).hidden = false;
+      const nx = q.querySelector<HTMLButtonElement>('.qz__next')!; nx.hidden = false; nx.focus({ preventScroll: true });
+    }));
+    q.querySelector('.qz__next')!.addEventListener('click', () => {
+      if (i + 1 < qs.length) show(i + 1);
+      else {
+        qs.forEach((x) => (x.hidden = true)); end.hidden = false; bar.style.transform = 'scaleX(1)';
+        document.getElementById('qz-s')!.textContent = String(score);
+        document.getElementById('qz-msg')!.textContent = score >= 7 ? 'Excelente: tienes muy claras las bases. Compártelo con tus amigos.' : score >= 4 ? 'Vas bien. Repasa los temas en los que fallaste y vuelve a intentarlo.' : 'Es un buen comienzo. Lee los artículos de Aprende y vuelve a intentarlo.';
+      }
+    });
+  });
+  document.getElementById('qz-again')!.addEventListener('click', () => {
+    score = 0; end.hidden = true;
+    qs.forEach((q) => {
+      q.querySelectorAll<HTMLButtonElement>('.qz__o').forEach((o) => { o.disabled = false; o.classList.remove('is-ok', 'is-bad'); });
+      q.querySelector('.qz__fb')!.textContent = ''; (q.querySelector('.qz__exp') as HTMLElement).hidden = true; (q.querySelector('.qz__next') as HTMLElement).hidden = true;
+    });
+    show(0);
+  });
+</script>
+
+<style>
+  .jump { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .jump a { display: inline-flex; min-height: 44px; align-items: center; padding: 0 20px; border-radius: 999px; background: rgba(247,245,239,.14); text-decoration: none; font-weight: 600; font-size: 16px; transition: background-color var(--t-hover) ease; }
+  .jump a:hover { background: var(--amarillo); color: var(--noche); }
+  .tool__head { display: grid; grid-template-columns: 5fr 6fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+  .tool__head p { margin: 0; max-width: 52ch; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label { font-weight: 600; font-size: 16px; }
+  .money { display: flex; align-items: center; gap: 6px; background: var(--hueso-2); border-radius: 999px; padding: 0 24px; height: 64px; font-size: 24px; font-weight: 800; }
+  .money--dark { background: rgba(247,245,239,.12); }
+  .money input, .field--pct input, .num { border: 0; background: transparent; font: inherit; color: inherit; width: 100%; min-width: 0; outline: none; }
+  .money:focus-within, .field--pct input:focus-visible, .num:focus-visible { outline: 3px solid var(--amarillo); outline-offset: 3px; }
+  .field--pct input, .num { background: var(--hueso-2); border-radius: 999px; height: 64px; padding: 0 24px; font-size: 24px; font-weight: 800; }
+
+  .calc__form { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; }
+  .calc__warn { min-height: 1.6em; margin: 16px 0; color: #9A3412; font-weight: 600; }
+  .calc__bar { display: flex; height: 120px; border-radius: 999px; overflow: hidden; gap: 4px; }
+  .b { flex-basis: 0; display: flex; align-items: center; padding: 0 28px; font-weight: 800; font-size: 18px; transition: flex-grow 500ms var(--ease-out); min-width: 0; overflow: hidden; white-space: nowrap; }
+  .b--n { background: var(--verde); color: var(--hueso); flex-grow: 0.5; }
+  .b--g { background: var(--menta); flex-grow: 0.3; }
+  .b--a { background: var(--amarillo); flex-grow: 0.2; }
+  .calc__out { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0 0; }
+  .calc__out dt { font-weight: 600; }
+  .calc__out dd { margin: 0; font-size: clamp(32px, 3.4vw, 52px); font-weight: 800; letter-spacing: -0.03em; }
+  .calc__out p { color: var(--muted); font-size: 16px; }
+
+  .sim { background: var(--noche); color: var(--hueso); }
+  .sim .tool__head p { color: #D9DFEA; }
+  .sim__grid { display: grid; grid-template-columns: 4fr 7fr; gap: 56px; align-items: start; }
+  .sim__form { display: flex; flex-direction: column; gap: 28px; }
+  .sim .num { background: rgba(247,245,239,.12); }
+  .hint { font-size: 15px; color: #C9D1DE; }
+  input[type='range'] { width: 100%; accent-color: var(--amarillo); height: 44px; cursor: pointer; }
+  output { color: var(--amarillo); font-weight: 800; }
+  .sim__total { margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .sim__lbl { display: block; font-size: 18px; font-weight: 600; letter-spacing: 0; color: var(--menta); margin-bottom: 8px; }
+  .sim__det { margin: 16px 0 32px; color: #D9DFEA; }
+  .sim__chart { width: 100%; height: auto; background: rgba(247,245,239,.06); border-radius: 24px; padding: 12px; }
+  .sim__legend { display: flex; align-items: center; gap: 10px; font-size: 15px; margin-top: 14px; flex-wrap: wrap; }
+  .lg { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+  .lg--a { background: var(--menta); } .lg--i { background: var(--amarillo); margin-left: 12px; }
+
+  .qz { background: var(--menta); border-radius: 48px; padding: clamp(28px, 5vw, 64px); position: relative; overflow: hidden; min-height: 460px; }
+  .qz__progress { position: absolute; left: 0; right: 0; top: 0; height: 10px; background: rgba(19,33,60,.12); }
+  .qz__progress span { display: block; height: 100%; background: var(--noche); transform-origin: left; transform: scaleX(0); transition: transform 500ms var(--ease-out); }
+  .qz__q { border: 0; padding: 0; margin: 0; }
+  .qz__q legend { font-size: clamp(24px, 2.4vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; max-width: 30ch; padding: 0; margin-bottom: 32px; }
+  .qz__n { display: block; font-size: 16px; font-weight: 600; letter-spacing: 0; margin-bottom: 12px; color: #0B4F3A; }
+  .qz__opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .qz__o { min-height: 64px; text-align: left; padding: 14px 24px 14px 60px; border: 0; border-radius: 999px; background: var(--hueso); color: var(--noche); font: 500 17px/1.3 'Poppins', sans-serif; cursor: pointer; position: relative; transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease; }
+  .qz__o::before { content: ''; position: absolute; left: 18px; top: 50%; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; background: var(--hueso-2); transition: background-color var(--t-hover) ease; }
+  .qz__o:hover:not(:disabled) { transform: translateY(-2px); }
+  .qz__o:hover:not(:disabled)::before { background: var(--amarillo); }
+  .qz__o:active:not(:disabled) { transform: scale(0.98); }
+  .qz__o:disabled { cursor: default; }
+  .qz__o.is-ok { background: var(--verde); color: var(--hueso); }
+  .qz__o.is-ok::before { background: var(--amarillo); }
+  .qz__o.is-bad { background: var(--noche); color: var(--hueso); }
+  .qz__fb { font-weight: 800; font-size: 20px; margin: 24px 0 4px; min-height: 1.4em; }
+  .qz__exp { max-width: 60ch; }
+  .qz__end { text-align: left; }
+  .qz__score { font-size: clamp(64px, 9vw, 140px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin: 0 0 16px; }
+  .qz__msg { font-size: 22px; max-width: 40ch; }
+  .qz__acts { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  @media (max-width: 860px) {
+    .tool__head, .sim__grid { grid-template-columns: 1fr; gap: 16px; }
+    .sim__grid { gap: 40px; }
+    .calc__form { grid-template-columns: 1fr 1fr 1fr; }
+    .calc__form .field:first-child { grid-column: 1 / -1; }
+    .field--pct input { padding: 0 16px; font-size: 20px; }
+    .field--pct label { font-size: 14px; }
+    .calc__bar { height: 72px; }
+    .b { padding: 0 14px; font-size: 14px; }
+    .calc__out { grid-template-columns: 1fr; gap: 12px; }
+    .qz__opts { grid-template-columns: 1fr; }
+    .qz { border-radius: 32px; }
+  }
+</style>

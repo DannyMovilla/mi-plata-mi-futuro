@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Illus from '../../components/Illus.astro';
+import { articulos } from '../../data/articulos';
+---
+<Base title="Aprende" description="Cinco artículos cortos de educación financiera para jóvenes: presupuesto, ahorro, crédito, estafas y compras inteligentes.">
+  <PageHero title="Aprende en cinco temas" lead="Artículos cortos, con ejemplos en pesos, para entender lo básico del dinero en menos de lo que dura un capítulo de tu serie." color="var(--noche)" />
+
+  <section class="section wrap idx" aria-labelledby="idx-h">
+    <h2 id="idx-h" class="sr-only">Artículos</h2>
+    <ul class="idx__list">
+      {articulos.map((a, i) => (
+        <li data-k={i}>
+          <a href={`/aprende/${a.slug}`} class="idx__row">
+            <span class="idx__t">{a.titulo}</span>
+            <span class="idx__meta">{a.tab} · {a.lectura} de lectura</span>
+            <span class="idx__r">{a.resumen}</span>
+            <span class="idx__inline" aria-hidden="true"><Illus name={a.illus} bg={a.color} /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="idx__frame" aria-hidden="true">
+      {articulos.map((a, i) => (
+        <div class="idx__img" data-k={i} data-on={i === 0 ? '' : undefined}><Illus name={a.illus} bg={a.color} /></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section info" aria-labelledby="info-h">
+    <div class="wrap info__in">
+      <a href="/multimedia#infografia" class="info__img"><img src="/img/infografia.png" width="2160" height="7642" alt="Vista previa de la infografía de la campaña" loading="lazy" /></a>
+      <div data-reveal>
+        <h2 id="info-h">Todo en una infografía</h2>
+        <p>Los datos, la regla 50/30/20, los cinco hábitos y las preguntas antes de comprar, en una sola imagen para guardar o compartir.</p>
+        <a class="btn btn--dark" href="/multimedia#infografia">Ver la infografía</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const rows = document.querySelectorAll<HTMLLIElement>('.idx__list li');
+  const imgs = document.querySelectorAll<HTMLElement>('.idx__img');
+  const list = document.querySelector('.idx__list')!;
+  const set = (k: number) => {
+    imgs.forEach((im, i) => im.toggleAttribute('data-on', i === k));
+    rows.forEach((r, i) => r.toggleAttribute('data-active', i === k));
+  };
+  rows.forEach((r, i) => {
+    r.addEventListener('mouseenter', () => { set(i); list.classList.add('is-hover'); });
+    r.addEventListener('focusin', () => { set(i); list.classList.add('is-hover'); });
+  });
+  list.addEventListener('mouseleave', () => list.classList.remove('is-hover'));
+  list.addEventListener('focusout', () => list.classList.remove('is-hover'));
+</script>
+
+<style>
+  .idx { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; align-items: start; }
+  .idx__list { list-style: none; padding: 0; margin: 0; }
+  .idx__row { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 28px 0; text-decoration: none; transition: color var(--t-ui) ease, transform var(--t-ui) var(--ease-out); }
+  .idx__t { font-size: clamp(28px, 2.9vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
+  .idx__meta { font-size: var(--t-small); font-weight: 600; color: var(--verde); }
+  .idx__r { color: var(--muted); max-width: 52ch; }
+  .idx__list.is-hover li:not([data-active]) .idx__row { color: var(--muted); }
+  .idx__list li[data-active] .idx__row { transform: translateX(12px); }
+  .idx__inline { display: none; }
+  .idx__frame { position: sticky; top: 40px; aspect-ratio: 1; }
+  .idx__img { position: absolute; inset: 0; opacity: 0; transform: scale(0.94) rotate(-6deg); transition: opacity 240ms ease, transform 420ms var(--ease-out); }
+  .idx__img[data-on] { opacity: 1; transform: none; }
+  .idx__img :global(svg) { width: 100%; height: 100%; }
+  .info { background: var(--amarillo); }
+  .info__in { display: grid; grid-template-columns: 5fr 6fr; gap: 64px; align-items: center; }
+  .info__img { display: block; height: 520px; overflow: hidden; border-radius: 48px 48px 0 0; transition: transform var(--t-ui) var(--ease-out); }
+  .info__img:hover { transform: translateY(-6px); }
+  .info__img img { width: 100%; height: auto; }
+  .info h2 { margin-bottom: 20px; }
+  .info p { max-width: 44ch; }
+  @media (max-width: 860px) {
+    .idx { grid-template-columns: 1fr; }
+    .idx__frame { display: none; }
+    .idx__inline { display: block; width: 112px; margin-top: 12px; order: -1; }
+    .idx__row { padding: 24px 0; }
+    .info__in { grid-template-columns: 1fr; gap: 32px; }
+    .info__img { height: 360px; }
+  }
+</style>

@@ -1,0 +1,364 @@
+---
+import Base from '../layouts/Base.astro';
+import Illus from '../components/Illus.astro';
+import { articulos } from '../data/articulos';
+const folders = [...articulos].reverse(); // el último en el DOM queda al frente
+const pasos = [
+  { n: 'Registra', t: 'Durante un mes, anota cada gasto, hasta el pasaje y el tinto. Así descubres a dónde se va tu plata sin adivinar.', il: 'registro', c: '#0E6B4F', ink: '#F7F5EF' },
+  { n: 'Reparte', t: 'Divide lo que recibes: 50 % para necesidades, 30 % para gustos y 20 % para ahorro. Ajusta los números a tu realidad.', il: 'presupuesto', c: '#1F7F5E', ink: '#F7F5EF' },
+  { n: 'Ahórrate primero', t: 'Apenas recibas dinero, separa el ahorro. Construye un fondo de emergencia de tres a seis meses de gastos básicos.', il: 'ahorro', c: '#3DDC97', ink: '#13213C' },
+  { n: 'Protégete', t: 'Compara créditos por su tasa E.A., paga el total de la tarjeta y desconfía de cualquier ganancia fácil y garantizada.', il: 'estafas', c: '#B8F5D8', ink: '#13213C' },
+];
+---
+<Base title="Inicio">
+  <!-- HERO: la moneda gigante y la pila de carpetas -->
+  <section class="hero">
+    <div class="hero__coin" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="100" fill="#FFC93C" />
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#E0A800" stroke-width="6" />
+        <path d="M62 116 L88 90 L106 108 L136 76" stroke="#0E6B4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <path d="M116 75 L137 75 L137 96" stroke="#0E6B4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg>
+    </div>
+    <div class="wrap hero__text">
+      <h1>Mi plata, <br />mi futuro</h1>
+      <p class="lead">Pequeños hábitos, grandes metas. Aprende a manejar tu dinero desde hoy, aunque recibas poco.</p>
+    </div>
+    <nav class="folders" aria-label="Temas para aprender">
+      {folders.map((a, i) => (
+        <a class="folder" href={`/aprende/${a.slug}`} style={`--c:${a.color}; --k:${i}; --tab:${8 + i * 17}%`} data-dark={a.color === '#13213C' ? '' : undefined}>
+          <span class="folder__tab">{a.tab}</span>
+          {i === folders.length - 1 && (
+            <span class="folder__body">
+              <span class="folder__title">Empieza por el presupuesto</span>
+              <span class="btn btn--dark">Empieza a aprender</span>
+            </span>
+          )}
+        </a>
+      ))}
+    </nav>
+  </section>
+
+  <!-- POR QUÉ IMPORTA -->
+  <section class="section stats wrap" aria-labelledby="stats-h">
+    <div class="stats__grid">
+      <div class="tile tile--a" data-reveal>
+        <p class="tile__n"><span data-count="56">56</span> %</p>
+        <p class="tile__c">de los estudiantes de 15 años en Colombia no alcanzó el nivel básico en educación financiera; el país quedó de último entre 18 (OCDE, 2014).</p>
+      </div>
+      <h2 id="stats-h" class="stats__h">Por qué importa</h2>
+      <div class="tile tile--b" data-reveal>
+        <p class="tile__n"><span data-count="81">81</span> %</p>
+        <p class="tile__c">de los colombianos no sabe calcular una tasa de interés simple (Banco Mundial, 2013).</p>
+      </div>
+      <div class="tile tile--c" data-reveal>
+        <p class="tile__n">1 de 5</p>
+        <p class="tile__c">personas podría cubrir un gasto grande e inesperado (Banco Mundial, 2013).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO: acordeón de tintes -->
+  <section class="section how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="how__intro" data-reveal>
+        <h2 id="how-h">Tu plan en cuatro movimientos</h2>
+        <p>No necesitas saber de economía para empezar. Estos cuatro hábitos, en este orden, son la base de unas finanzas sanas a cualquier edad.</p>
+      </div>
+      <div class="acc" role="tablist" aria-label="Los cuatro movimientos">
+        {pasos.map((p, i) => (
+          <div class="acc__panel" style={`--c:${p.c}; --ink:${p.ink}`} data-open={i === 0 ? '' : undefined}>
+            <button class="acc__btn" role="tab" aria-selected={i === 0 ? 'true' : 'false'} id={`acc-${i}`} aria-controls={`accp-${i}`}>
+              <span>{p.n}</span>
+            </button>
+            <div class="acc__body" id={`accp-${i}`} role="tabpanel" aria-labelledby={`acc-${i}`}>
+              <div class="acc__txt">
+                <h3>{p.n}</h3>
+                <p>{p.t}</p>
+              </div>
+              <Illus name={p.il} class="acc__ill" bg="rgba(247,245,239,.18)" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS: párrafo con palabras-imagen -->
+  <section class="section feat wrap" aria-labelledby="feat-h">
+    <h2 id="feat-h" class="sr-only">Herramientas</h2>
+    <p class="feat__p" data-reveal>
+      <span>Reparte tu plata <span class="slot slot--bar" aria-hidden="true"><i></i><i></i><i></i></span>, mira crecer tu ahorro <span class="slot slot--grow" aria-hidden="true"><svg viewBox="0 0 76 40"><path d="M4 34 L22 26 L38 28 L54 14 L72 6" stroke="#13213C" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span> y mide lo que sabes <span class="slot slot--quiz" aria-hidden="true"><svg viewBox="0 0 76 40"><circle cx="38" cy="20" r="14" fill="#13213C"/><path d="M31 20 L36 25 L45 15" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>.</span>
+    </p>
+    <div class="feat__go" data-reveal>
+      <p>Tres herramientas gratuitas, pensadas para el celular y sin registrarte.</p>
+      <a class="btn" href="/herramientas">Usar las herramientas</a>
+    </div>
+  </section>
+
+  <!-- VITRINA EN VIVO: tu plata en la moneda -->
+  <section class="section show" aria-labelledby="show-h">
+    <div class="wrap show__in">
+      <div class="show__left">
+        <ul class="show__list" role="tablist" aria-labelledby="show-h">
+          <li id="show-h" class="show__h">Tu plata, repartida</li>
+          <li><button role="tab" aria-selected="true" data-k="0">Necesidades</button></li>
+          <li><button role="tab" aria-selected="false" data-k="1">Gustos</button></li>
+          <li><button role="tab" aria-selected="false" data-k="2">Ahorro</button></li>
+        </ul>
+        <label class="show__in-label" for="ingreso">¿Cuánto recibes al mes?</label>
+        <div class="money">
+          <span>$</span>
+          <input id="ingreso" inputmode="numeric" autocomplete="off" value="1.000.000" aria-describedby="show-fact" />
+        </div>
+      </div>
+      <div class="show__disc">
+        <svg viewBox="0 0 200 200" class="donut" role="img" aria-label="Reparto 50/30/20 de tu ingreso">
+          <circle cx="100" cy="100" r="100" fill="#FFC93C" />
+          <circle cx="100" cy="100" r="64" fill="none" stroke="#E0A800" stroke-width="1" opacity="0" />
+          <g transform="rotate(-90 100 100)" fill="none" stroke-width="44">
+            <circle class="seg" data-k="0" cx="100" cy="100" r="64" stroke="#0E6B4F" pathLength="100" stroke-dasharray="49.4 50.6" stroke-dashoffset="0" />
+            <circle class="seg" data-k="1" cx="100" cy="100" r="64" stroke="#3DDC97" pathLength="100" stroke-dasharray="29.4 70.6" stroke-dashoffset="-50" />
+            <circle class="seg" data-k="2" cx="100" cy="100" r="64" stroke="#13213C" pathLength="100" stroke-dasharray="19.4 80.6" stroke-dashoffset="-80" />
+          </g>
+          <circle cx="100" cy="100" r="40" fill="#F7F5EF" />
+          <text x="100" y="98" text-anchor="middle" class="donut__pct">50 %</text>
+          <text x="100" y="116" text-anchor="middle" class="donut__lbl">necesidades</text>
+        </svg>
+        <p class="show__fact" id="show-fact" aria-live="polite"><b>$500.000</b> para transporte, comida, matrícula, servicios y celular.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE: fila de fichas -->
+  <section class="section cta" aria-labelledby="cta-h">
+    <div class="cta__row">
+      <div class="cta__side cta__side--ill"><Illus name="meta" bg="#3DDC97" class="cta__svg" /></div>
+      <div class="cta__main" data-reveal>
+        <h2 id="cta-h">Mira el video de la campaña</h2>
+        <p>Te contamos en pocos minutos por qué creamos Mi Plata, Mi Futuro, y te mostramos la infografía y las herramientas.</p>
+        <a class="btn btn--dark" href="/multimedia">Ver video e infografía</a>
+      </div>
+      <a class="cta__side cta__side--flat" href="/multimedia#infografia" aria-label="Ver la infografía"><img src="/img/infografia.png" width="2160" height="7642" alt="" loading="lazy" /></a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Contadores
+  const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target as HTMLElement; const end = +el.dataset.count!; const t0 = performance.now();
+      const tick = (t: number) => { const p = Math.min(1, (t - t0) / 1100); el.textContent = String(Math.round(end * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick); io.unobserve(el);
+    }), { threshold: 0.6 });
+    counters.forEach((c) => io.observe(c));
+  }
+
+  // Acordeón
+  const panels = document.querySelectorAll<HTMLElement>('.acc__panel');
+  panels.forEach((p) => p.querySelector('button')!.addEventListener('click', () => {
+    panels.forEach((q) => { q.toggleAttribute('data-open', q === p); q.querySelector('button')!.setAttribute('aria-selected', String(q === p)); });
+  }));
+
+  // Vitrina en vivo
+  const pct = [50, 30, 20];
+  const names = ['necesidades', 'gustos', 'ahorro'];
+  const facts = [
+    'para transporte, comida, matrícula, servicios y celular.',
+    'para salidas, ropa, streaming y antojos, sin culpa.',
+    'para tu fondo de emergencia y tus metas.',
+  ];
+  let sel = 0;
+  const input = document.getElementById('ingreso') as HTMLInputElement;
+  const fact = document.getElementById('show-fact')!;
+  const pctT = document.querySelector('.donut__pct')!;
+  const lblT = document.querySelector('.donut__lbl')!;
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.show__list button');
+  const segs = document.querySelectorAll<SVGCircleElement>('.seg');
+  const fmt = (n: number) => '$' + Math.round(n).toLocaleString('es-CO');
+  const val = () => +input.value.replace(/\D/g, '') || 0;
+  function render() {
+    const v = val();
+    pctT.textContent = pct[sel] + ' %';
+    lblT.textContent = names[sel];
+    fact.innerHTML = `<b>${fmt(v * pct[sel] / 100)}</b> ${facts[sel]}`;
+    tabs.forEach((t, i) => t.setAttribute('aria-selected', String(i === sel)));
+    segs.forEach((s, i) => s.classList.toggle('is-on', i === sel));
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => { sel = i; render(); });
+    t.addEventListener('mouseenter', () => { sel = i; render(); });
+  });
+  segs.forEach((s, i) => s.addEventListener('click', () => { sel = i; render(); }));
+  input.addEventListener('input', () => {
+    const v = val();
+    input.value = v ? v.toLocaleString('es-CO') : '';
+    render();
+  });
+  render();
+</script>
+
+<style>
+  /* HERO */
+  .hero { position: relative; min-height: max(760px, 100svh); background: var(--verde); color: var(--hueso); overflow: hidden; }
+  .hero__coin { position: absolute; width: 118vh; height: 118vh; min-width: 720px; min-height: 720px; right: -40vh; top: 13vh; animation: coin-drift 26s var(--ease-in-out) infinite alternate; }
+  .hero__coin svg { width: 100%; height: 100%; }
+  @keyframes coin-drift { from { transform: rotate(-6deg) translateY(0); } to { transform: rotate(4deg) translateY(2.5vh); } }
+  .hero__text { position: relative; z-index: 2; padding-top: clamp(120px, 15vh, 170px); }
+  .hero h1 { font-size: clamp(56px, 8.4vw, 140px); max-width: 9ch; }
+  .hero .lead { margin-top: 24px; max-width: 32ch; }
+  html.js .hero h1, html.js .hero .lead { animation: rise 900ms var(--ease-out) both; }
+  html.js .hero .lead { animation-delay: 120ms; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } }
+
+  .folders { position: absolute; left: 7%; right: 7%; bottom: 0; height: 36%; z-index: 3; }
+  .folder { position: absolute; left: 0; right: 0; bottom: 0; top: calc(var(--k) * 48px + 40px); background: var(--c); color: var(--noche); border-radius: 0 28px 0 0; text-decoration: none; transition: transform var(--t-ui) var(--ease-out); }
+  .folder[data-dark] { color: var(--hueso); }
+  .folder:hover { transform: translateY(-10px); }
+  .folder:last-child:hover { transform: none; }
+  .folder__tab { position: absolute; bottom: 100%; left: var(--tab); height: 40px; padding: 0 24px; display: flex; align-items: center; background: var(--c); border-radius: 22px 22px 0 0; font-size: 18px; font-weight: 600; white-space: nowrap; }
+  .folder__body { position: absolute; inset: 0; padding: 30px 32px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+  .folder__title { font-size: var(--t-h3); font-weight: 800; letter-spacing: -0.015em; max-width: 22ch; line-height: 1.2; }
+  .folder:focus-visible { outline-offset: -6px; }
+
+  @media (max-width: 760px) {
+    .hero { min-height: 100svh; }
+    .hero__coin { width: 96vw; height: 96vw; min-width: 0; min-height: 0; right: -46vw; top: 40svh; }
+    .hero__text { padding-top: 112px; }
+    .hero h1 { font-size: 16vw; }
+    .hero .lead { font-size: 18px; max-width: 24ch; }
+    .folders { left: 0; right: 0; height: 46%; }
+    .folder { top: calc(var(--k) * 44px + 36px); border-radius: 0; }
+    .folder__tab { height: 34px; font-size: 15px; padding: 0 16px; left: calc(4% + var(--k) * 16%); }
+    .folder__body { flex-direction: column; padding: 22px var(--margin); }
+    .folder__body .btn { width: 100%; }
+  }
+
+  /* STATS */
+  .stats__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; align-items: start; }
+  .tile { padding: 28px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 0 0 0 0; }
+  .tile--a { grid-column: 1 / 7; grid-row: 1 / 3; min-height: 70vh; background: var(--amarillo); border-top-right-radius: 50% 22%; }
+  .tile--b { grid-column: 7 / 10; grid-row: 2; margin-top: 0; min-height: 44vh; background: var(--noche); color: var(--hueso); border-top-right-radius: 50% 30%; }
+  .tile--c { grid-column: 10 / 13; grid-row: 2; margin-top: 12vh; min-height: 34vh; background: var(--menta); border-top-right-radius: 50% 36%; }
+  .stats__h { grid-column: 7 / 13; grid-row: 1; align-self: end; padding: 0 0 24px 4px; font-size: clamp(30px, 3vw, 40px); }
+  .tile__n { font-size: clamp(56px, 5.4vw, 92px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin: 0; }
+  .tile--b .tile__n, .tile--c .tile__n { font-size: clamp(44px, 3.8vw, 64px); }
+  .tile__c { font-size: 18px; margin: 0; max-width: 34ch; }
+  .tile .small { display: inline-block; margin-top: 10px; font-weight: 600; }
+  @media (max-width: 860px) {
+    .stats__grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .stats__h { grid-column: 1 / -1; grid-row: 1; padding: 0 0 12px; font-size: 28px; }
+    .tile--a { grid-column: 1 / -1; grid-row: 2; min-height: 56vw; }
+    .tile--b { grid-column: 1; grid-row: 3; min-height: 64vw; }
+    .tile--c { grid-column: 2; grid-row: 3; margin-top: 32px; min-height: 64vw; }
+    .tile { padding: 20px; }
+    .tile__n { font-size: 15vw; }
+    .tile--b .tile__n, .tile--c .tile__n { font-size: 10vw; }
+    .tile__c { font-size: 16px; }
+  }
+
+  /* ACORDEÓN */
+  .how { padding-top: 0; }
+  .how__intro { display: grid; grid-template-columns: 5fr 1fr 5fr; gap: 0 24px; margin-bottom: 64px; }
+  .how__intro h2 { grid-column: 1; font-size: clamp(36px, 4vw, 60px); }
+  .how__intro p { grid-column: 3; font-size: 18px; align-self: end; margin: 0; }
+  .acc { display: flex; height: 520px; }
+  .acc__panel { flex: 0 0 auto; width: 96px; background: var(--c); color: var(--ink); position: relative; overflow: hidden; transition: width 450ms var(--ease-in-out), flex-grow 450ms var(--ease-in-out); }
+  .acc__panel[data-open] { flex: 1 1 auto; }
+  .acc__panel:first-child { border-top-left-radius: 260px 100%; border-top-left-radius: 48px; }
+  .acc__panel:last-child { border-top-right-radius: 48px; }
+  .acc__btn { position: absolute; inset: 0; width: 100%; border: 0; background: transparent; color: inherit; cursor: pointer; font: 600 20px/1 'Poppins', sans-serif; text-align: left; }
+  .acc__btn span { position: absolute; left: 34px; bottom: 28px; transform-origin: left bottom; transform: rotate(-90deg) translateY(100%); white-space: nowrap; }
+  .acc__panel[data-open] .acc__btn { pointer-events: none; }
+  .acc__panel[data-open] .acc__btn span { opacity: 0; }
+  .acc__body { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr minmax(0, 46%); gap: 24px; padding: 40px; opacity: 0; visibility: hidden; transition: opacity 300ms ease; }
+  .acc__panel[data-open] .acc__body { opacity: 1; visibility: visible; transition-delay: 200ms; }
+  .acc__txt { display: flex; flex-direction: column; justify-content: space-between; min-width: 30ch; }
+  .acc__txt h3 { font-size: clamp(30px, 3vw, 42px); letter-spacing: -0.03em; }
+  .acc__txt p { max-width: 36ch; margin: 0; }
+  .acc__ill { align-self: center; width: 100%; max-width: 380px; justify-self: end; }
+  @media (max-width: 860px) {
+    .how__intro { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+    .how__intro p { grid-column: 1; }
+    .acc { flex-direction: column; height: auto; }
+    .acc__panel { width: auto; min-height: 64px; border-radius: 0 !important; }
+    .acc__panel:first-child { border-top-left-radius: 32px !important; border-top-right-radius: 32px !important; }
+    .acc__btn { position: relative; height: 64px; padding: 0 var(--margin); font-size: 18px; }
+    .acc__btn span { position: static; transform: none; }
+    .acc__panel[data-open] .acc__btn { display: none; }
+    .acc__body { position: relative; display: none; grid-template-columns: 1fr; padding: 28px var(--margin); }
+    .acc__panel[data-open] .acc__body { display: grid; }
+    .acc__txt { min-width: 0; gap: 12px; }
+    .acc__txt h3 { font-size: 30px; }
+    .acc__txt p { font-size: 17px; }
+    .acc__ill { max-width: 220px; justify-self: start; }
+  }
+
+  /* PÁRRAFO CON PALABRAS-IMAGEN */
+  .feat__p { font-size: clamp(26px, 3vw, 36px); line-height: 1.32; font-weight: 500; letter-spacing: -0.015em; max-width: 30ch; margin: 0; }
+  .feat__p > span { display: inline; }
+  .slot { display: inline-flex; vertical-align: -0.16em; width: 1.9em; height: 1em; border-radius: 0.5em; overflow: hidden; }
+  .slot--bar i:nth-child(1) { flex: 50; background: var(--verde); }
+  .slot--bar i:nth-child(2) { flex: 30; background: var(--menta); }
+  .slot--bar i:nth-child(3) { flex: 20; background: var(--amarillo); }
+  .slot--grow { background: var(--menta); }
+  .slot--quiz { background: var(--amarillo); }
+  .slot svg { width: 100%; height: 100%; }
+  .feat__go { margin-top: 72px; margin-left: 50%; max-width: 40ch; }
+  @media (max-width: 860px) { .feat__p { font-size: 24px; } .slot { width: 1.5em; } .feat__go { margin: 40px 0 0; } }
+
+  /* VITRINA */
+  .show { padding-top: 0; }
+  .show__in { display: grid; grid-template-columns: 1fr 1.25fr; gap: 40px; align-items: end; min-height: 80vh; }
+  .show__list { list-style: none; padding: 0; margin: 0 0 40px; }
+  .show__h, .show__list button { font-size: clamp(30px, 2.9vw, 44px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; }
+  .show__h { color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+  .show__list button { border: 0; background: none; padding: 2px 0 2px 0; color: var(--muted); cursor: pointer; font-family: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 14px; transition: color var(--t-hover) ease; }
+  .show__list button::before { content: ''; width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--amarillo); opacity: 0; transform: scale(0.4); transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; }
+  .show__list button[aria-selected='true'] { color: var(--ink); font-weight: 800; }
+  .show__list button[aria-selected='true']::before { transform: scale(1); opacity: 1; }
+  .show__in-label { display: block; font-weight: 600; font-size: 18px; margin-bottom: 8px; }
+  .money { display: flex; align-items: center; gap: 6px; background: var(--hueso-2); border-radius: 999px; padding: 0 24px; height: 64px; max-width: 360px; font-size: 26px; font-weight: 800; }
+  .money input { border: 0; background: transparent; font: inherit; color: inherit; width: 100%; min-width: 0; outline: none; }
+  .money:focus-within { outline: 3px solid var(--amarillo); outline-offset: 3px; }
+  .show__disc { position: relative; justify-self: center; width: min(64vh, 100%); }
+  .donut { width: 100%; height: auto; }
+  .seg { transition: stroke-width var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; cursor: pointer; }
+  .seg { stroke-width: 36; } .seg.is-on { stroke-width: 56; }
+  .donut__pct { font: 800 22px 'Poppins', sans-serif; fill: var(--noche); }
+  .donut__lbl { font: 500 9.5px 'Poppins', sans-serif; fill: var(--muted); }
+  .show__fact { font-size: 18px; margin: 20px auto 0; max-width: 40ch; text-align: center; }
+  .show__fact b { font-size: 23px; }
+  .show__in > * { min-width: 0; }
+  @media (max-width: 860px) {
+    .show__in { grid-template-columns: 1fr; min-height: 0; }
+    .show__disc { order: -1; width: 86vw; }
+    .show__list { display: flex; gap: 22px; overflow-x: auto; flex-wrap: nowrap; margin-bottom: 24px; }
+    .show__h { display: none; }
+    .show__list button { font-size: 26px; white-space: nowrap; }
+  }
+
+  /* CTA */
+  .cta { padding-top: 0; overflow: hidden; }
+  .cta__row { display: grid; grid-template-columns: 1fr 4fr 1fr; gap: 12px; margin: 0 -6vw; }
+  .cta__main, .cta__side { height: 380px; border-radius: 40px; }
+  .cta__main { background: var(--amarillo); padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+  .cta__main h2 { font-size: clamp(30px, 3vw, 42px); max-width: 18ch; }
+  .cta__main p { font-size: 18px; max-width: 46ch; margin: 16px 0 24px; }
+  .cta__side--ill { background: var(--menta); display: grid; place-items: center; overflow: hidden; }
+  .cta__svg { width: 120%; max-width: none; }
+  .cta__side--flat { background: var(--noche); overflow: hidden; display: block; }
+  .cta__side--flat img { width: 100%; height: auto; transition: transform 700ms var(--ease-soft); }
+  .cta__side--flat:hover img { transform: translateY(-12%); }
+  @media (max-width: 860px) {
+    .cta__row { grid-template-columns: 1fr 1fr; margin: 0 var(--margin); }
+    .cta__main { grid-column: 1 / -1; grid-row: 1; height: auto; min-height: 300px; padding: 28px; }
+    .cta__main h2 { font-size: 28px; }
+    .cta__side { height: 120px; border-radius: 28px; }
+  }
+</style>
