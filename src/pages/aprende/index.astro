@@ -16,14 +16,14 @@ import { articulos } from '../../data/articulos';
             <span class="idx__t">{a.titulo}</span>
             <span class="idx__meta">{a.tab} · {a.lectura} de lectura</span>
             <span class="idx__r">{a.resumen}</span>
-            <span class="idx__inline" aria-hidden="true"><Illus name={a.illus} bg={a.color} /></span>
+            <span class="idx__inline" aria-hidden="true"><Illus name={a.illus} bg={a.color === '#F7F5EF' ? '#ECE8DC' : a.color} /></span>
           </a>
         </li>
       ))}
     </ul>
     <div class="idx__frame" aria-hidden="true">
       {articulos.map((a, i) => (
-        <div class="idx__img" data-k={i} data-on={i === 0 ? '' : undefined}><Illus name={a.illus} bg={a.color} /></div>
+        <div class="idx__img" data-k={i} data-on={i === 0 ? '' : undefined}><Illus name={a.illus} bg={a.color === '#F7F5EF' ? '#ECE8DC' : a.color} /></div>
       ))}
     </div>
   </section>
