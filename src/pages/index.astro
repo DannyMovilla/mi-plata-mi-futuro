@@ -96,24 +96,13 @@ const pasos = [
     </div>
   </section>
 
-  <!-- HERRAMIENTAS: párrafo con palabras-imagen -->
-  <section class="section feat wrap" aria-labelledby="feat-h">
-    <h2 id="feat-h" class="sr-only">Herramientas</h2>
-    <p class="feat__p" data-reveal>
-      <span>Reparte tu plata <span class="slot slot--bar" aria-hidden="true"><i></i><i></i><i></i></span>, mira crecer tu ahorro <span class="slot slot--grow" aria-hidden="true"><svg viewBox="0 0 76 40"><path d="M4 34 L22 26 L38 28 L54 14 L72 6" stroke="#13213C" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span> y mide lo que sabes <span class="slot slot--quiz" aria-hidden="true"><svg viewBox="0 0 76 40"><circle cx="38" cy="20" r="14" fill="#13213C"/><path d="M31 20 L36 25 L45 15" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>.</span>
-    </p>
-    <div class="feat__go" data-reveal>
-      <p>Tres herramientas gratuitas, pensadas para el celular y sin registrarte.</p>
-      <a class="btn" href="/herramientas">Usar las herramientas</a>
-    </div>
-  </section>
-
-  <!-- VITRINA EN VIVO: tu plata en la moneda -->
+  <!-- HERRAMIENTAS + VITRINA EN VIVO: tu plata en la moneda -->
   <section class="section show" aria-labelledby="show-h">
     <div class="wrap show__in">
       <div class="show__left">
-        <ul class="show__list" role="tablist" aria-labelledby="show-h">
-          <li id="show-h" class="show__h">Tu plata, repartida</li>
+        <h2 id="show-h" class="feat__p"><span>Reparte tu plata <span class="slot slot--bar" aria-hidden="true"><i></i><i></i><i></i></span>, mira crecer tu ahorro <span class="slot slot--grow" aria-hidden="true"><svg viewBox="0 0 76 40"><path d="M4 34 L22 26 L38 28 L54 14 L72 6" stroke="#13213C" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span> y mide lo que sabes <span class="slot slot--quiz" aria-hidden="true"><svg viewBox="0 0 76 40"><circle cx="38" cy="20" r="14" fill="#13213C"/><path d="M31 20 L36 25 L45 15" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>.</span></h2>
+        <p class="show__intro">Pruébalo aquí: escribe cuánto recibes y toca cada parte para ver tu reparto 50/30/20.</p>
+        <ul class="show__list" role="tablist" aria-label="Partes del reparto">
           <li><button role="tab" aria-selected="true" data-k="0">Necesidades</button></li>
           <li><button role="tab" aria-selected="false" data-k="1">Gustos</button></li>
           <li><button role="tab" aria-selected="false" data-k="2">Ahorro</button></li>
@@ -122,6 +111,10 @@ const pasos = [
         <div class="money">
           <span>$</span>
           <input id="ingreso" inputmode="numeric" autocomplete="off" value="1.000.000" aria-describedby="show-fact" />
+        </div>
+        <div class="show__go">
+          <a class="btn" href="/herramientas">Usar las herramientas</a>
+          <span class="show__note">También el simulador de ahorro y el quiz. Gratis y sin registrarte.</span>
         </div>
       </div>
       <div class="show__disc">
@@ -323,7 +316,7 @@ const pasos = [
   }
 
   /* PÁRRAFO CON PALABRAS-IMAGEN */
-  .feat__p { font-size: clamp(26px, 3vw, 36px); line-height: 1.32; font-weight: 500; letter-spacing: -0.015em; max-width: 30ch; margin: 0; }
+  .feat__p { font-size: clamp(26px, 2.6vw, 36px); line-height: 1.3; font-weight: 600; letter-spacing: -0.02em; max-width: 24ch; margin: 0; }
   .feat__p > span { display: inline; }
   .slot { display: inline-flex; vertical-align: -0.16em; width: 1.9em; height: 1em; border-radius: 0.5em; overflow: hidden; }
   .slot--bar i:nth-child(1) { flex: 50; background: var(--verde); }
@@ -332,21 +325,22 @@ const pasos = [
   .slot--grow { background: var(--menta); }
   .slot--quiz { background: var(--amarillo); }
   .slot svg { width: 100%; height: 100%; }
-  .feat__go { margin-top: 72px; margin-left: 50%; max-width: 40ch; }
-  @media (max-width: 860px) { .feat__p { font-size: 24px; } .slot { width: 1.5em; } .feat__go { margin: 40px 0 0; } }
+  @media (max-width: 860px) { .feat__p { font-size: 24px; } .slot { width: 1.5em; } }
 
   /* VITRINA */
-  .show { padding-top: 0; }
-  .show__in { display: grid; grid-template-columns: 1fr 1.25fr; gap: 40px; align-items: end; min-height: 80vh; }
-  .show__list { list-style: none; padding: 0; margin: 0 0 40px; }
-  .show__h, .show__list button { font-size: clamp(30px, 2.9vw, 44px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; }
-  .show__h { color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+  .show { background: var(--hueso-2); }
+  .show__intro { margin: 20px 0 28px; max-width: 40ch; }
+  .show__go { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 36px; }
+  .show__note { font-size: 15px; color: var(--muted); max-width: 26ch; }
+  .show__in { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .show__list { list-style: none; padding: 0; margin: 0 0 28px; }
+  .show__list button { font-size: clamp(26px, 2.4vw, 36px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; }
   .show__list button { border: 0; background: none; padding: 2px 0 2px 0; color: var(--muted); cursor: pointer; font-family: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 14px; transition: color var(--t-hover) ease; }
   .show__list button::before { content: ''; width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--amarillo); opacity: 0; transform: scale(0.4); transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; }
   .show__list button[aria-selected='true'] { color: var(--ink); font-weight: 800; }
   .show__list button[aria-selected='true']::before { transform: scale(1); opacity: 1; }
   .show__in-label { display: block; font-weight: 600; font-size: 18px; margin-bottom: 8px; }
-  .money { display: flex; align-items: center; gap: 6px; background: var(--hueso-2); border-radius: 999px; padding: 0 24px; height: 64px; max-width: 360px; font-size: 26px; font-weight: 800; }
+  .money { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 999px; padding: 0 24px; height: 64px; max-width: 360px; font-size: 26px; font-weight: 800; }
   .money input { border: 0; background: transparent; font: inherit; color: inherit; width: 100%; min-width: 0; outline: none; }
   .money:focus-within { outline: 3px solid var(--amarillo); outline-offset: 3px; }
   .show__disc { position: relative; justify-self: center; width: min(64vh, 100%); }
@@ -360,10 +354,10 @@ const pasos = [
   .show__in > * { min-width: 0; }
   @media (max-width: 860px) {
     .show__in { grid-template-columns: 1fr; min-height: 0; }
-    .show__disc { order: -1; width: 86vw; }
+    .show__disc { width: 86vw; }
     .show__list { display: flex; gap: 22px; overflow-x: auto; flex-wrap: nowrap; margin-bottom: 24px; }
-    .show__h { display: none; }
-    .show__list button { font-size: 26px; white-space: nowrap; }
+    .show__list { gap: 18px; }
+    .show__list button { font-size: 21px; white-space: nowrap; gap: 8px; }
   }
 
   /* CTA */
