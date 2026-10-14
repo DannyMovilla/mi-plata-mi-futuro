@@ -33,14 +33,14 @@ const recursos = [
     <div class="wrap info__in">
       <div class="info__txt" data-reveal>
         <h2 id="inf-h">La infografía</h2>
-        <p>Elaborada por el equipo con datos de la OCDE y el Banco Mundial. Resume por qué importa la educación financiera, la regla 50/30/20, cinco hábitos clave, cómo reconocer una estafa y las preguntas que conviene hacerse antes de comprar.</p>
+        <p>Elaborada por el equipo con datos de la Banca de las Oportunidades, la Superintendencia Financiera y la OCDE. Resume por qué importa la educación financiera, la regla 50/30/20, cinco hábitos clave, cómo reconocer una estafa y las preguntas que conviene hacerse antes de comprar.</p>
         <div class="info__acts">
           <a class="btn btn--dark" href="/img/infografia.png" download>Descargar PNG</a>
           <a class="btn btn--light" href="/img/infografia.pdf" download>Descargar PDF</a>
         </div>
       </div>
       <a class="info__img" href="/img/infografia.png" target="_blank" rel="noopener">
-        <img src="/img/infografia.png" width="2160" height="7642" alt="Infografía Mi Plata, Mi Futuro: 5 pasos para tomar el control de tu plata. Incluye datos sobre Colombia, la regla 50/30/20 con un ejemplo de $1.000.000, cinco hábitos (anotar gastos, págate primero, fondo de emergencia, crédito con cabeza, regla de las 48 horas), una alerta sobre estafas y cuatro preguntas antes de comprar." loading="lazy" />
+        <img src="/img/infografia.png" width="2160" height="7540" alt="Infografía Mi Plata, Mi Futuro: 5 pasos para tomar el control de tu plata. Incluye datos sobre Colombia, la regla 50/30/20 con un ejemplo de $1.000.000, cinco hábitos (anotar gastos, págate primero, fondo de emergencia, crédito con cabeza, regla de las 48 horas), una alerta sobre estafas y cuatro preguntas antes de comprar." loading="lazy" />
       </a>
     </div>
   </section>
@@ -80,13 +80,13 @@ const recursos = [
   .info__txt p { max-width: 50ch; }
   .info__acts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
   .info__img { display: block; height: 640px; overflow: hidden; border-radius: 48px 48px 0 0; transition: transform var(--t-ui) var(--ease-out); }
-  .info__img:hover { transform: translateY(-6px); }
+  @media (hover: hover) and (pointer: fine) { .info__img:hover { transform: translateY(-6px); } }
   .info__img img { width: 100%; height: auto; }
   .gal h2 { margin-bottom: 40px; }
   .gal__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
   .g { margin: 0; background: #fff; border-radius: 40px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; overflow: hidden; }
-  .g img { width: 100%; height: auto; transition: transform 500ms var(--ease-out); }
-  .g:hover img { transform: scale(1.03); }
+  .g img { width: 100%; height: auto; transition: transform 300ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) { .g:hover img { transform: scale(1.03); } }
   .g figcaption { font-size: 15px; font-weight: 600; color: var(--muted); }
   .g--a { grid-column: 1 / 6; grid-row: span 2; }
   .g--b { grid-column: 6 / 13; background: var(--noche); }
@@ -100,8 +100,8 @@ const recursos = [
   .rec__list { list-style: none; padding: 0; margin: 0; }
   .rec__list a { display: flex; flex-direction: column; gap: 4px; padding: 22px 0 22px 44px; text-decoration: none; position: relative; transition: transform var(--t-ui) var(--ease-out); }
   .rec__list a::before { content: ''; position: absolute; left: 0; top: 28px; width: 22px; height: 22px; border-radius: 50%; background: var(--amarillo); transition: transform var(--t-ui) var(--ease-out); }
-  .rec__list a:hover { transform: translateX(8px); }
-  .rec__list a:hover::before { transform: scale(1.25); }
+  @media (hover: hover) and (pointer: fine) { .rec__list a:hover { transform: translateX(8px); } }
+  @media (hover: hover) and (pointer: fine) { .rec__list a:hover::before { transform: scale(1.25); } }
   .rec__t { font-size: var(--t-h3); font-weight: 800; letter-spacing: -0.015em; }
   .rec__d { color: #D9DFEA; }
   @media (max-width: 860px) {

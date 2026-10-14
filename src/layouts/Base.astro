@@ -134,7 +134,8 @@ const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera p
   nav ul { display: flex; gap: clamp(16px, 2.4vw, 36px); list-style: none; margin: 0; padding: 0; }
   nav a { text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 0; position: relative; }
   nav a::after { content: ''; position: absolute; left: 50%; bottom: 2px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--amarillo); opacity: 0; transform: scale(0.4); transition: transform var(--t-hover) var(--ease-out), opacity var(--t-hover) ease; }
-  nav a:hover::after, nav a[aria-current='page']::after { transform: scale(1); opacity: 1; }
+  nav a[aria-current='page']::after { transform: scale(1); opacity: 1; }
+  @media (hover: hover) and (pointer: fine) { nav a:hover::after { transform: scale(1); opacity: 1; } }
   .menu-btn { display: none; }
 
   @media (max-width: 860px) {
@@ -142,8 +143,8 @@ const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera p
     .menu-btn i { display: block; width: 20px; height: 2.5px; background: var(--noche); border-radius: 2px; transition: transform var(--t-ui) var(--ease-out); }
     :global(body.menu-open) .menu-btn i:first-of-type { transform: translateY(4.75px) rotate(45deg); }
     :global(body.menu-open) .menu-btn i:last-of-type { transform: translateY(-4.75px) rotate(-45deg); }
-    nav { position: fixed; inset: 0; background: var(--noche); color: var(--hueso); display: flex; align-items: center; padding: var(--margin); clip-path: circle(0 at calc(100% - 44px) 42px); visibility: hidden; transition: clip-path 450ms var(--ease-in-out), visibility 0s linear 450ms; z-index: 25; }
-    :global(body.menu-open) nav { clip-path: circle(150% at calc(100% - 44px) 42px); visibility: visible; transition: clip-path 450ms var(--ease-in-out), visibility 0s; }
+    nav { position: fixed; inset: 0; background: var(--noche); color: var(--hueso); display: flex; align-items: center; padding: var(--margin); clip-path: circle(0 at calc(100% - 44px) 42px); visibility: hidden; transition: clip-path 300ms var(--ease-out), visibility 0s linear 300ms; z-index: 25; }
+    :global(body.menu-open) nav { clip-path: circle(150% at calc(100% - 44px) 42px); visibility: visible; transition: clip-path 380ms var(--ease-out), visibility 0s; }
     nav ul { flex-direction: column; gap: 8px; padding-left: 24px; }
     nav a { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; }
     nav a::after { left: -20px; top: 50%; margin: -4px 0 0; }
@@ -159,11 +160,11 @@ const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera p
   .foot__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
   .foot__h { font-size: 16px; letter-spacing: 0; margin-bottom: 12px; color: var(--hueso); }
   .foot__cols a { display: block; text-decoration: none; font-size: 16px; padding: 5px 0; color: #C9D1DE; transition: color var(--t-hover) ease; }
-  .foot__cols a:hover { color: var(--amarillo); }
-  .foot__last { display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(247,245,239,.14); font-size: 15px; color: #A9B4C6; flex-wrap: wrap; }
+  @media (hover: hover) and (pointer: fine) { .foot__cols a:hover { color: var(--amarillo); } }
+  .foot__last { display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; margin-top: 64px; font-size: 15px; color: #A9B4C6; flex-wrap: wrap; }
   .foot__up { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; font-weight: 600; color: var(--hueso); }
   .foot__up::before { content: ''; width: 32px; height: 32px; border-radius: 50%; background: var(--amarillo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 18V6M7 11l5-5 5 5' stroke='%2313213C' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat; transition: transform var(--t-hover) var(--ease-out); }
-  .foot__up:hover::before { transform: translateY(-3px); }
+  @media (hover: hover) and (pointer: fine) { .foot__up:hover::before { transform: translateY(-3px); } }
   @media (max-width: 860px) {
     .foot { padding-top: 64px; }
     .foot__top-row { grid-template-columns: 1fr; gap: 40px; }

@@ -26,7 +26,7 @@ const colores = [
     <div class="wrap just__in">
       <div data-reveal>
         <h2 id="just">Por qué la hicimos</h2>
-        <p>En la prueba PISA de 2012, el 56 % de los estudiantes colombianos de 15 años no alcanzó el nivel básico en educación financiera, y Colombia quedó de último entre los 18 países evaluados (OCDE, 2014). En la población adulta, el 81 % no sabe calcular una tasa de interés simple y solo una de cada cinco personas podría cubrir un gasto grande e inesperado (Banco Mundial, 2013).</p>
+        <p>En Colombia, el 96,3 % de los adultos ya tiene al menos un producto financiero, como una cuenta de ahorros o una billetera digital (Superintendencia Financiera de Colombia y Banca de las Oportunidades, 2025). Pero tener una cuenta no es lo mismo que saber usarla: en la encuesta nacional más reciente, el 54,4 % de las personas no ahorró de ninguna forma y el 18 % guarda su dinero en una alcancía o en la casa (Banca de las Oportunidades y Superintendencia Financiera de Colombia, 2022). Además, en la última prueba PISA de educación financiera que presentó el país, el 56 % de los estudiantes de 15 años no alcanzó el nivel básico (OCDE, 2014).</p>
         <p>Estas cifras muestran un vacío que la escuela casi nunca llena. Mientras tanto, los jóvenes reciben cada día ofertas de crédito fácil, compras a cuotas y promesas de inversiones milagrosas en redes sociales. Una campaña cercana, en su lenguaje y en los canales que usan, puede ayudarles a tomar mejores decisiones desde ya.</p>
       </div>
       <Illus name="meta" bg="#FFC93C" class="just__ill" />
@@ -111,7 +111,7 @@ const colores = [
   .ident__colors { list-style: none; padding: 0; margin: 64px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
   .ident__colors li { display: flex; flex-direction: column; gap: 2px; font-size: 16px; }
   .dot { width: 100%; aspect-ratio: 1; border-radius: 50%; margin-bottom: 16px; outline: 2px solid var(--hueso-2); outline-offset: -2px; /* taste-skill-ignore: borde del círculo blanco sobre fondo claro */ transition: transform var(--t-ui) var(--ease-out); }
-  .ident__colors li:hover .dot { transform: rotate(-8deg) scale(1.04); }
+  @media (hover: hover) and (pointer: fine) { .ident__colors li:hover .dot { transform: rotate(-8deg) scale(1.04); } }
   .hex { color: var(--muted); }
   .m { margin-top: 6px; }
   @media (max-width: 860px) {

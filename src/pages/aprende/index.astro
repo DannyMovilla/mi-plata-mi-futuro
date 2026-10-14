@@ -30,7 +30,7 @@ import { articulos } from '../../data/articulos';
 
   <section class="section info" aria-labelledby="info-h">
     <div class="wrap info__in">
-      <a href="/multimedia#infografia" class="info__img"><img src="/img/infografia.png" width="2160" height="7642" alt="Vista previa de la infografía de la campaña" loading="lazy" /></a>
+      <a href="/multimedia#infografia" class="info__img"><img src="/img/infografia.png" width="2160" height="7540" alt="Vista previa de la infografía de la campaña" loading="lazy" /></a>
       <div data-reveal>
         <h2 id="info-h">Todo en una infografía</h2>
         <p>Los datos, la regla 50/30/20, los cinco hábitos y las preguntas antes de comprar, en una sola imagen para guardar o compartir.</p>
@@ -73,7 +73,7 @@ import { articulos } from '../../data/articulos';
   .info { background: var(--amarillo); }
   .info__in { display: grid; grid-template-columns: 5fr 6fr; gap: 64px; align-items: center; }
   .info__img { display: block; height: 520px; overflow: hidden; border-radius: 48px 48px 0 0; transition: transform var(--t-ui) var(--ease-out); }
-  .info__img:hover { transform: translateY(-6px); }
+  @media (hover: hover) and (pointer: fine) { .info__img:hover { transform: translateY(-6px); } }
   .info__img img { width: 100%; height: auto; }
   .info h2 { margin-bottom: 20px; }
   .info p { max-width: 44ch; }

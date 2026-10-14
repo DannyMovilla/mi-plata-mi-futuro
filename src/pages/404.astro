@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import { articulos } from '../data/articulos';
+---
+<Base title="Página no encontrada" description="Esta página no existe. Vuelve al inicio de Mi Plata, Mi Futuro.">
+  <section class="nf">
+    <div class="nf__coin" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="100" fill="#FFC93C" />
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#E0A800" stroke-width="6" />
+        <text x="100" y="122" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="800" font-size="62" fill="#0E6B4F" letter-spacing="-3">404</text>
+      </svg>
+    </div>
+    <div class="wrap nf__in">
+      <h1>Esta plata se perdió</h1>
+      <p class="lead">La página que buscas no existe o cambió de dirección. Tranquilo: tu presupuesto sigue intacto.</p>
+      <div class="nf__acts">
+        <a class="btn" href="/">Volver al inicio</a>
+        <a class="nf__link" href="/herramientas#calculadora">Calcular mi 50/30/20</a>
+      </div>
+      <p class="nf__sub">O lee uno de los temas:</p>
+      <ul class="nf__list">
+        {articulos.map((a) => <li><a href={`/aprende/${a.slug}`}>{a.tab}</a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { position: relative; min-height: 100svh; background: var(--verde); color: var(--hueso); overflow: hidden; display: flex; align-items: center; }
+  .nf__coin { position: absolute; width: 74vh; height: 74vh; min-width: 460px; min-height: 460px; right: -10vh; top: calc(50% - 37vh); animation: spin 1.2s var(--ease-out) both; }
+  .nf__coin svg { width: 100%; height: 100%; }
+  @keyframes spin { from { transform: rotate(-30deg) scale(0.92); opacity: 0; } }
+  .nf__in { position: relative; z-index: 2; padding-top: 120px; padding-bottom: 80px; }
+  .nf h1 { font-size: clamp(48px, 6.4vw, 104px); max-width: 10ch; }
+  .nf .lead { margin-top: 24px; max-width: 34ch; }
+  .nf__acts { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 36px; }
+  .nf__link { font-weight: 600; text-decoration: underline; text-decoration-color: var(--menta); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .nf__sub { margin: 48px 0 12px; font-weight: 600; color: var(--menta-2); }
+  .nf__list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .nf__list a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: rgba(247,245,239,.14); text-decoration: none; font-weight: 600; transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+  .nf__list a:active { background: var(--amarillo); color: var(--noche); }
+  @media (hover: hover) and (pointer: fine) { .nf__list a:hover { background: var(--amarillo); color: var(--noche); } }
+  @media (max-width: 760px) {
+    .nf { align-items: flex-start; }
+    .nf__coin { width: 70vw; height: 70vw; min-width: 0; min-height: 0; right: -20vw; top: auto; bottom: -18vw; }
+    .nf__in { padding-bottom: 60vw; }
+    .nf h1 { font-size: 13vw; }
+  }
+</style>
