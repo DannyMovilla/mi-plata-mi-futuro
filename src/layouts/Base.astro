@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 interface Props { title: string; description?: string; dark?: boolean; inkBar?: boolean }
-const { inkBar = false, title, description = 'Mi Plata, Mi Futuro: campaña de educación financiera para jóvenes. Pequeños hábitos, grandes metas.', dark = true } = Astro.props;
+const { inkBar = false, title, description = 'Mi Dinero, Mi Futuro: campaña de educación financiera para jóvenes. Pequeños hábitos, grandes metas.', dark = true } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const nav = [
   { href: '/campana', label: 'La campaña' },
@@ -11,7 +11,7 @@ const nav = [
   { href: '/equipo', label: 'Equipo' },
 ];
 const isActive = (href: string) => path === href || path.startsWith(href + '/');
-const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera para jóvenes' : `${title} · Mi Plata, Mi Futuro`;
+const fullTitle = path === '/' ? 'Mi Dinero, Mi Futuro · Educación financiera para jóvenes' : `${title} · Mi Dinero, Mi Futuro`;
 ---
 <!doctype html>
 <html lang="es">
@@ -31,9 +31,9 @@ const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera p
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class:list={['bar', { 'bar--light': !dark, 'bar--ink': inkBar }]}>
     <div class="wrap bar__in">
-      <a href="/" class="mark" aria-label="Mi Plata, Mi Futuro, inicio">
+      <a href="/" class="mark" aria-label="Mi Dinero, Mi Futuro, inicio">
         <img src="/img/icon.svg" width="40" height="40" alt="" />
-        <span>Mi Plata, <b>Mi Futuro</b></span>
+        <span>Mi Dinero, <b>Mi Futuro</b></span>
       </a>
       <button class="menu-btn" aria-expanded="false" aria-controls="menu">
         <span class="sr-only">Abrir menú</span><i></i><i></i>
@@ -56,9 +56,9 @@ const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera p
     <div class="wrap">
       <div class="foot__top-row">
         <div class="foot__brand">
-          <a href="/" class="foot__logo" aria-label="Mi Plata, Mi Futuro, inicio">
+          <a href="/" class="foot__logo" aria-label="Mi Dinero, Mi Futuro, inicio">
             <img src="/img/icon.svg" width="56" height="56" alt="" />
-            <span>Mi Plata, <b>Mi Futuro</b></span>
+            <span>Mi Dinero, <b>Mi Futuro</b></span>
           </a>
           <p class="foot__slogan">Pequeños hábitos, grandes metas.</p>
           <p class="foot__about">Campaña de educación financiera para jóvenes. Proyecto de aula de Informática y Convergencia Tecnológica, CUN, 2026.</p>
@@ -93,7 +93,7 @@ const fullTitle = path === '/' ? 'Mi Plata, Mi Futuro · Educación financiera p
         </div>
       </div>
       <div class="foot__last">
-        <span>© 2026 Mi Plata, Mi Futuro · Información educativa, no reemplaza la asesoría de un profesional financiero.</span>
+        <span>© 2026 Mi Dinero, Mi Futuro · Información educativa, no reemplaza la asesoría de un profesional financiero.</span>
         <a href="#contenido" class="foot__up">Volver arriba</a>
       </div>
     </div>

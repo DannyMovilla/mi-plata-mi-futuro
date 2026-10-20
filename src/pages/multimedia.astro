@@ -10,7 +10,7 @@ const recursos = [
 ];
 ---
 <Base title="Multimedia" description="Video de la campaña, infografía descargable, galería de la identidad visual y recursos para seguir aprendiendo.">
-  <PageHero title="Mira, descarga y comparte" lead="El video de la campaña, la infografía y los recursos visuales de Mi Plata, Mi Futuro, listos para compartir." color="var(--verde)" coin="#3DDC97" />
+  <PageHero title="Mira, descarga y comparte" lead="El video de la campaña, la infografía y los recursos visuales de Mi Dinero, Mi Futuro, listos para compartir." color="var(--verde)" coin="#3DDC97" />
 
   <section class="section wrap vid" id="video" aria-labelledby="vid-h">
     <div class="vid__head" data-reveal>
@@ -19,7 +19,7 @@ const recursos = [
     </div>
     <div class="vid__frame">
       {VIDEO_ID ? (
-        <iframe src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}`} title="Video de la campaña Mi Plata, Mi Futuro" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}`} title="Video de la campaña Mi Dinero, Mi Futuro" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       ) : (
         <div class="vid__soon">
           <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#FFC93C" /><path d="M82 64 L142 100 L82 136 Z" fill="#13213C" /></svg>
@@ -40,7 +40,7 @@ const recursos = [
         </div>
       </div>
       <a class="info__img" href="/img/infografia.png" target="_blank" rel="noopener">
-        <img src="/img/infografia.png" width="2160" height="7540" alt="Infografía Mi Plata, Mi Futuro: 5 pasos para tomar el control de tu plata. Incluye datos sobre Colombia, la regla 50/30/20 con un ejemplo de $1.000.000, cinco hábitos (anotar gastos, págate primero, fondo de emergencia, crédito con cabeza, regla de las 48 horas), una alerta sobre estafas y cuatro preguntas antes de comprar." loading="lazy" />
+        <img src="/img/infografia.png" width="2160" height="7540" alt="Infografía Mi Dinero, Mi Futuro: 5 pasos para tomar el control de tu plata. Incluye datos sobre Colombia, la regla 50/30/20 con un ejemplo de $1.000.000, cinco hábitos (anotar gastos, págate primero, fondo de emergencia, crédito con cabeza, regla de las 48 horas), una alerta sobre estafas y cuatro preguntas antes de comprar." loading="lazy" />
       </a>
     </div>
   </section>
@@ -48,8 +48,8 @@ const recursos = [
   <section class="section wrap gal" aria-labelledby="gal-h">
     <h2 id="gal-h" data-reveal><span>Galería de la identidad</span></h2>
     <div class="gal__grid">
-      <figure class="g g--a"><img src="/img/logo-vertical.png" width="1800" height="1320" alt="Logo vertical de la campaña" loading="lazy" /><figcaption>Logo vertical</figcaption></figure>
-      <figure class="g g--b"><img src="/img/logo-horizontal-oscuro.png" width="2856" height="768" alt="Logo horizontal sobre fondo azul noche" loading="lazy" /><figcaption>Logo sobre fondo oscuro</figcaption></figure>
+      <figure class="g g--a"><img src="/img/logo-vertical.png" width="2040" height="1320" alt="Logo vertical de la campaña" loading="lazy" /><figcaption>Logo vertical</figcaption></figure>
+      <figure class="g g--b"><img src="/img/logo-horizontal-oscuro.png" width="3126" height="768" alt="Logo horizontal sobre fondo azul noche" loading="lazy" /><figcaption>Logo sobre fondo oscuro</figcaption></figure>
       <figure class="g g--c"><img src="/img/paleta-colores.png" width="3200" height="1800" alt="Paleta de colores: Verde Bosque, Verde Menta, Amarillo Moneda, Azul Noche y Blanco Hueso" loading="lazy" /><figcaption>Paleta de colores y tipografía</figcaption></figure>
       <figure class="g g--d"><img src="/img/icon.png" width="800" height="800" alt="Ícono de la campaña: moneda con brote" loading="lazy" /><figcaption>Ícono</figcaption></figure>
     </div>

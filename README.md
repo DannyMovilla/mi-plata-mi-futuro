@@ -1,6 +1,6 @@
-# Mi Plata, Mi Futuro
+# Mi Dinero, Mi Futuro
 
-Sitio web de la campaña digital de **educación financiera para jóvenes** «Mi Plata, Mi Futuro: pequeños hábitos, grandes metas». Es el proyecto de aula de Informática y Convergencia Tecnológica de la CUN (2026).
+Sitio web de la campaña digital de **educación financiera para jóvenes** «Mi Dinero, Mi Futuro: pequeños hábitos, grandes metas». Es el proyecto de aula de Informática y Convergencia Tecnológica de la CUN (2026).
 
 Está hecho con [Astro](https://astro.build) y se publica en Netlify.
 
